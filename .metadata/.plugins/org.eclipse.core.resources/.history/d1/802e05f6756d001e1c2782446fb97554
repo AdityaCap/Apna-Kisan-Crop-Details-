@@ -1,0 +1,10 @@
+package com.cropDetails.Clients;
+
+import org.springframework.cloud.openfeign.FeignClient;
+
+import com.cropDetails.ErrorDecoder.CustomErrorDecoder;
+
+@FeignClient(url = "http://localhost:9091/crop", name = "crop-service", configuration = CustomErrorDecoder.class)
+public interface UserClient {
+
+}

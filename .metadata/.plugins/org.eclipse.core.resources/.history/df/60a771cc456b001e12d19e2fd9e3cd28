@@ -1,0 +1,19 @@
+package com.cropDetails.Model;
+
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Document(collection = "subscriptions")
+public class CropSubscription {
+    @MongoId
+    private int subscriptionId; // You can use a unique ID for each subscription
+    private int uId; // Dealer's user ID
+    private String subscribedCropType; // Type of crop they want to subscribe to
+}
+

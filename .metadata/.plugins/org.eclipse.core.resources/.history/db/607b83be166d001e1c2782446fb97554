@@ -1,0 +1,13 @@
+package com.cropDetails.User.Dto;
+
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "subscriptions")
+public class CropSubscription {
+    
+    private int sId; 
+    
+    private int dealerId; // Dealer's user ID
+    
+    private String cropType; // Type of crop they want to subscribe to
+}

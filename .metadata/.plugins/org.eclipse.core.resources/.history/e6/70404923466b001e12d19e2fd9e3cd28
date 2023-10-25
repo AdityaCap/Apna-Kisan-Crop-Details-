@@ -1,0 +1,20 @@
+package com.cropDetails.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.cropDetails.Exceptions.CropAlreadyExistException;
+import com.cropDetails.Exceptions.NoCropFoundException;
+import com.cropDetails.Exceptions.NoCropRegisteredException;
+import com.cropDetails.Model.Crop;
+
+public interface ICropService {
+
+	List<Crop> viewAllCrops() throws NoCropFoundException;
+	Optional<Crop> addCrop(Crop crop) throws CropAlreadyExistException;
+	Boolean deleteCropById(int id) throws NoCropRegisteredException;
+	Optional<Crop> updateCrop(Crop crop) throws NoCropRegisteredException;
+	Optional<Crop> getCropById(int id)throws NoCropRegisteredException;
+	Optional<Crop> getCropByName(String name)throws NoCropRegisteredException;
+	Optional<Crop> getCropByType(String type)throws NoCropRegisteredException;
+}

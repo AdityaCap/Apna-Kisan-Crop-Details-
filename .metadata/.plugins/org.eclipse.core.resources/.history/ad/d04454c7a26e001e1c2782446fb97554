@@ -1,0 +1,17 @@
+package com.cropDetails.User.Dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class CropSubscription {
+    
+    private int sId; 
+    
+    private int dealerId; // Dealer's user ID
+    
+    private String cropType; // Type of crop they want to subscribe to
+}

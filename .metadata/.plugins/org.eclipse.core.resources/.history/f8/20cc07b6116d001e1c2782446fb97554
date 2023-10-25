@@ -1,0 +1,92 @@
+package com.cropDetails.User.Controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cropDetails.User.Clients.CropClient;
+import com.cropDetails.User.Dto.Crop;
+import com.cropDetails.User.Dto.CropSubscription;
+import com.cropDetails.User.Exceptions.NoUserFoundException;
+import com.cropDetails.User.Exceptions.ResourceAlreadyExistsException;
+
+import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
+@RestController
+@RequestMapping("/crop")
+@EnableFeignClients(basePackages = "com.CropDetails.User.Clients")
+public class CropClientController {
+	@Autowired
+	CropClient cropClient;
+	
+	@PreAuthorize("hasAnyRole('FARMER','ADMIN','DEALER')")
+	@GetMapping("/getAll")
+	public List<Crop>getAllCrops() {
+		 return cropClient.viewAllCrops();			
+	}
+	@PostMapping("/register")
+	@PreAuthorize("hasAnyRole('FARMER')")
+	public ResponseEntity<Crop> addCrop(@Valid @RequestBody Crop crop) throws ResourceAlreadyExistsException, NoUserFoundException{
+		log.info("Saving.. " + crop);
+		Crop c=cropClient.addCrop(crop).getBody();
+		return new ResponseEntity<Crop>(c,HttpStatus.CREATED);
+		
+	}
+
+	@DeleteMapping("/deleteById/{id}")
+	public ResponseEntity<Boolean> deleteCropById(@PathVariable int id){
+		
+	}
+
+	@PutMapping("/update")
+	public ResponseEntity<Crop> updateCrop(@Valid @RequestBody Crop crop){
+		
+	}
+
+	@GetMapping("/getById/{id}")
+	public ResponseEntity<Crop> getCropById(@PathVariable int id){
+		
+	}
+
+	@GetMapping("/getByName/{name}")
+	public ResponseEntity<Crop> getCropByName(@PathVariable String name){
+		
+	}
+
+	@GetMapping("/getByType/{type}")
+	public ResponseEntity<List<Crop>> getCropByType(@PathVariable String type){
+		
+	}
+
+	@PostMapping("/subscribe")
+	public ResponseEntity<String> subscribeToCrop(@Valid @RequestBody CropSubscription request){
+		
+	}
+
+	@GetMapping("/getAllSubscriptions")
+	public ResponseEntity<List<CropSubscription>> getSubscription(){
+		
+	}
+
+	@DeleteMapping("deleteSubscriptionById/{id}")
+	public ResponseEntity<Boolean> deleteSubscriptionById(@PathVariable int id){
+		
+	}
+	 
+	
+	
+
+}

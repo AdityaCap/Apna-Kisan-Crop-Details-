@@ -1,0 +1,23 @@
+server.port=8888
+spring.application.name=api-gateway
+eureka.instance.hostname=localhost
+
+spring.cloud.gateway.routes[0].id=user-service
+spring.cloud.gateway.routes[0].uri=lb://user-service
+spring.cloud.gateway.routes[0].predicates[0]=Path=/**
+
+spring.cloud.gateway.routes[1].id=crop-service
+spring.cloud.gateway.routes[1].uri=lb://crop-service
+spring.cloud.gateway.routes[1].predicates[0]=Path=/**
+
+spring.cloud.gateway.routes[2].id=invoice-service
+spring.cloud.gateway.routes[2].uri=lb://invoice-service
+spring.cloud.gateway.routes[2].predicates[0]=Path=/**
+
+# Cloud Gateway configuration
+cloud.gateway.default-filters[0]=DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+cloud.gateway.globalcors.cors-configurations.[/**].allowedOrigins=*
+cloud.gateway.globalcors.cors-configurations.[/**].allowedMethods=*
+cloud.gateway.globalcors.cors-configurations.[/**].allowedHeaders=*
+
+

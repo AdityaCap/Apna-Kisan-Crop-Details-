@@ -1,0 +1,53 @@
+package com.cropDetails.Invoice.Controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cropDetails.Invoice.Clients.CropClient;
+import com.cropDetails.Invoice.Clients.UserClient;
+import com.cropDetails.Invoice.Exceptions.InvoiceNotFoundException;
+import com.cropDetails.Invoice.Exceptions.InvoiceNotRegisteredException;
+import com.cropDetails.Invoice.Model.Invoice;
+import com.cropDetails.Invoice.Service.InvoiceService;
+@RequestMapping("/invoice")
+@RestController
+public class InvoiceController {
+	@Autowired
+	CropClient cropClient;
+	@Autowired
+	UserClient userClient;
+	@Autowired
+	InvoiceService ser;
+	
+	@PostMapping("/generate")
+    public ResponseEntity<Invoice> generateInvoice(@RequestBody Invoice invoice) {
+        Optional<Invoice> generatedInvoice = ser.generateInvoice(invoice);
+        if (generatedInvoice.isPresent()) {
+            return new ResponseEntity<>(generatedInvoice.get(), HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+	@DeleteMapping("/cancel/{invoiceId}")
+    public ResponseEntity<Boolean> cancelInvoice(@PathVariable int invoiceId) throws InvoiceNotFoundException {
+		return new ResponseEntity<Boolean>(ser.cancelInvoice(invoiceId),HttpStatus.OK);
+    }
+	@GetMapping("/all")
+    public ResponseEntity<List<Invoice>> getAllInvoices() throws InvoiceNotRegisteredException {
+        List<Invoice> invoices = ser.getAllInvoices();
+        return new ResponseEntity<>(invoices, HttpStatus.OK);
+    }
+	
+
+}

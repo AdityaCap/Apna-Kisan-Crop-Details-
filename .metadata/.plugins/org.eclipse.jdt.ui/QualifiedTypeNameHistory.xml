@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.cropDetails.User.Clients.CropClient"/>
+    <fullyQualifiedTypeName name="org.springframework.cloud.openfeign.EnableFeignClients"/>
+    <fullyQualifiedTypeName name="org.springframework.security.access.prepost.PreAuthorize"/>
+    <fullyQualifiedTypeName name="org.springframework.data.mongodb.core.mapping.MongoId"/>
+    <fullyQualifiedTypeName name="com.cropDetails.Invoice.Exceptions.ResourceNotFoundException"/>
+    <fullyQualifiedTypeName name="com.cropDetails.Invoice.CustomErrorDecoder"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RestController"/>
+    <fullyQualifiedTypeName name="com.cropDetails.Invoice.Service.InvoiceService"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
+    <fullyQualifiedTypeName name="java.util.Optional"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+    <fullyQualifiedTypeName name="com.cropDetails.Invoice.Repository.InvoiceRepository"/>
+    <fullyQualifiedTypeName name="com.cropDetails.Invoice.Dto.User"/>
+    <fullyQualifiedTypeName name="com.cropDetails.Invoice.Clients.UserClient"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="com.cropDetails.Invoice.Clients.CropClient"/>
+    <fullyQualifiedTypeName name="com.cropDetails.Invoice.Model.Invoice"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
+    <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
+    <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
+    <fullyQualifiedTypeName name="org.springframework.data.mongodb.repository.MongoRepository"/>
+    <fullyQualifiedTypeName name="java.lang.Exception"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RestControllerAdvice"/>
+    <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
+    <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
+    <fullyQualifiedTypeName name="com.cropDetails.Invoice.ExceptionHandler.InvoiceExceptionsHandler"/>
+    <fullyQualifiedTypeName name="com.cropDetails.Invoice.Exceptions.InvoiceNotFoundException"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ExceptionHandler"/>
+    <fullyQualifiedTypeName name="com.cropDetails.Invoice.Exceptions.InvoiceNotRegisteredException"/>
+</qualifiedTypeNameHistroy>

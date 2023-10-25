@@ -1,0 +1,146 @@
+package com.cropDetails.User.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cropDetails.User.Exceptions.NoDealersFoundException;
+import com.cropDetails.User.Exceptions.NoFarmersFoundExceptions;
+import com.cropDetails.User.Exceptions.NoUserFoundException;
+import com.cropDetails.User.Exceptions.UserAlreadyExistsException;
+import com.cropDetails.User.Exceptions.UserNotRegisteredException;
+import com.cropDetails.User.Model.User;
+import com.cropDetails.User.Repository.UserRepo;
+
+@Service
+public class UserServiceImpl implements IUserService{
+	@Autowired
+	UserRepo repo;
+
+	@Override
+	public Optional<User> addUser(User User)throws UserAlreadyExistsException {
+		Optional<User> f=repo.findById(User.getUId());
+		if(f.isPresent()) {
+			throw new UserAlreadyExistsException();
+		}
+		User far=repo.save(User);
+		return  Optional.of(far);
+	}
+
+	@Override
+	public Optional<User> viewUserById(int id) throws UserNotRegisteredException  {
+		Optional<User>f=repo.findById(id);
+		if(f.isEmpty()) {
+			throw new UserNotRegisteredException ();
+		}
+		
+		return f;
+	}
+
+	
+
+	@Override
+	public List<User> viewAllUsers() throws NoUserFoundException {
+		
+		List<User> l=repo.findAll();
+		if(l.isEmpty()) {
+			throw new NoUserFoundException();
+		}
+		return l;
+				
+	}
+
+	@Override
+	public Optional<User> updateUser(User User)throws UserNotRegisteredException {
+		Optional<User> f=repo.findById(User.getUId());
+		if(f.isEmpty()) {
+			throw new UserNotRegisteredException();
+		}
+		User far=repo.save(User);
+		return Optional.of(far);
+	}
+
+	@Override
+	public Boolean deleteUserById(int id) throws UserNotRegisteredException {
+		Optional<User> f=repo.findById(id);
+		if(f.isEmpty()) {
+			throw new UserNotRegisteredException();
+			
+		}
+		repo.deleteById(id);
+		return true;
+	}
+
+	@Override
+	public Optional<User> getByName(String name) throws UserNotRegisteredException {
+		Optional <User> u=repo.findByName(name);
+		if(u.isEmpty()) {
+			throw new UserNotRegisteredException();
+		}
+		
+		return u;
+	}
+
+	@Override
+	public Optional<User> getByMobile(Long mobile) throws UserNotRegisteredException {
+		
+		Optional <User> u=repo.findByMobileNumber(mobile);
+		if(u.isEmpty()) {
+			throw new UserNotRegisteredException();
+		}
+		
+		return u;
+	}
+
+	@Override
+	public Optional<User> getByEmail(String email) throws UserNotRegisteredException {
+		Optional <User> u=repo.findByEmail(email);
+		if(u.isEmpty()) {
+			throw new UserNotRegisteredException();
+		}
+		
+		return u;
+	}
+
+	@Override
+	public Optional<List<User>> getAllFarmers() throws UserNotRegisteredException,NoFarmersFoundExceptions {
+		
+		Optional <List<User>> u=repo.findByRole();
+		if(u.isEmpty()) {
+			throw new UserNotRegisteredException();
+		}
+		List<User> l=new ArrayList<>();
+		for(User user:u.get()) {
+			if(user.getRole().equalsIgnoreCase("Farmer")) {
+				l.add(user);
+			}			
+		}
+		if(l.isEmpty()) {
+			throw new NoFarmersFoundExceptions();
+		}
+		
+		
+		return l;
+	}
+
+	@Override
+	public Optional<User> getAllDealers() throws NoDealersFoundException {
+		
+		Optional <User> u=repo.findByRole();
+		if(u.isEmpty()) {
+			throw new NoDealersFoundException();
+		}
+		
+		return u;
+	}
+	
+
+
+	
+
+	
+
+}

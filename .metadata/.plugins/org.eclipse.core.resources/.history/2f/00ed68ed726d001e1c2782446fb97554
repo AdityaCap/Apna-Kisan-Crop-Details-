@@ -1,0 +1,5 @@
+package com.cropDetails.DTO;
+
+public class UserDto {
+
+}

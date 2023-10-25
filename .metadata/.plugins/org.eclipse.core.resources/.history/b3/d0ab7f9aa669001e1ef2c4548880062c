@@ -1,0 +1,69 @@
+package com.cropDetails.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cropDetails.Exceptions.CropAlreadyExistException;
+import com.cropDetails.Exceptions.NoCropFoundException;
+import com.cropDetails.Exceptions.NoCropRegisteredException;
+import com.cropDetails.Model.Crop;
+import com.cropDetails.Repository.CropRepository;
+
+@Service
+public class CropServImpl implements ICropService {
+	
+
+	@Autowired
+	CropRepository repo;
+	@Override
+	public List<Crop> viewAllCrops() throws NoCropFoundException{
+		List<Crop> l=repo.findAll();
+		if(l.isEmpty()) {
+			throw new NoCropFoundException();
+		}
+		return l;
+	}
+
+	@Override
+	public Optional<Crop> addCrop(Crop crop)throws CropAlreadyExistException {
+		Optional<Crop> c=repo.findById(crop.getCId());
+		if(c.isPresent()) {
+			throw new CropAlreadyExistException();
+		}
+		Crop cr=repo.save(crop);
+		return Optional.of(cr);
+	}
+
+	@Override
+	public Boolean deleteCropById(int id) throws NoCropRegisteredException{
+		Optional<Crop> c=repo.findById(id);
+		if(c.isEmpty()) {
+			throw new NoCropRegisteredException();
+		}
+		repo.deleteById(id);
+		return true;
+	}
+
+	@Override
+	public Optional<Crop> updateCrop(Crop crop)throws NoCropRegisteredException {
+		Optional<Crop> c=repo.findById(crop.getCId());
+		if(c.isEmpty()) {
+			throw new NoCropRegisteredException();
+		}
+		Crop cr=repo.save(crop);
+		return Optional.of(cr);
+	}
+
+	@Override
+	public Optional<Crop> getCropById(int id)throws NoCropRegisteredException {
+		Optional<Crop> c=repo.findById(id);
+		if(c.isEmpty()) {
+			throw new NoCropRegisteredException();
+		}
+		return c;
+	}
+
+}

@@ -1,0 +1,5 @@
+package com.cropDetails.Email.Contoller;
+
+public class EmailController {
+
+}

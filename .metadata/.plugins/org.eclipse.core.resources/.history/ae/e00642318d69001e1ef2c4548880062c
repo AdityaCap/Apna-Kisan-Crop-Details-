@@ -1,0 +1,26 @@
+package com.cropDetails.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.cropDetails.Exceptions.UserAlreadyExistsException;
+
+import com.cropDetails.Exceptions.UserNotRegisteredException;
+import com.cropDetails.Exceptions.NoUserFoundException;
+import com.cropDetails.Model.Farmer;
+
+public interface IFarmerService {
+
+	
+
+	List<Farmer> viewAllFarmers()throws NoUserFoundException;
+
+	Optional<Farmer> addfarmer(Farmer farmer) throws UserAlreadyExistsException;
+
+	Optional<Farmer> viewFarmerById(int id) throws UserNotRegisteredException;
+
+	Optional<Farmer> updateFarmer(Farmer farmer)throws UserNotRegisteredException;
+
+	Boolean deleteFarmerById(int id)throws UserNotRegisteredException ;
+
+}

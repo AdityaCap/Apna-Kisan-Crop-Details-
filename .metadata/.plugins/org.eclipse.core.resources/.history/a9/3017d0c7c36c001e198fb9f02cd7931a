@@ -1,0 +1,18 @@
+package com.cropDetails.User.Clients;
+
+import java.util.List;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.cropDetails.User.Dto.Crop;
+import com.cropDetails.User.ErrorDecoder.CustomErrorDecoder;
+
+@FeignClient(url="http:localhost/9092/crop",name="crop-service",configuration=CustomErrorDecoder.class)
+public interface CropClient {
+	@GetMapping("getAll")
+	public List<Crop>viewAllCrops();
+	
+	
+
+}

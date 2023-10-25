@@ -1,0 +1,5 @@
+package com.cropDetails.ExceptionHandler;
+
+public interface CropExceptionHandler {
+
+}

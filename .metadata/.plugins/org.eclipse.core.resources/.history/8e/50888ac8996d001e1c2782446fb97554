@@ -1,0 +1,5 @@
+package com.cropDetails.User.Dto;
+
+public class Invoice {
+
+}

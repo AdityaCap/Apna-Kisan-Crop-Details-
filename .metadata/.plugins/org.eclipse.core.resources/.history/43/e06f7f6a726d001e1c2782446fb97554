@@ -1,0 +1,8 @@
+package com.cropDetails.Clients;
+
+import org.springframework.cloud.openfeign.FeignClient;
+
+@FeignClient(url="",)
+public interface UserClient {
+
+}

@@ -1,0 +1,9 @@
+package com.cropDetails.Repository;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import com.cropDetails.Model.CropSubscription;
+
+public interface CropSubscriptionRepository extends MongoRepository<CropSubscription, Integer> {
+
+}

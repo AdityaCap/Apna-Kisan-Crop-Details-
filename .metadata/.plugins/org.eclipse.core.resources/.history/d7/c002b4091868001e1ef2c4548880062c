@@ -1,0 +1,51 @@
+package com.cropDetails.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cropDetails.Exceptions.CropAlreadyExistException;
+import com.cropDetails.Exceptions.NoCropFoundException;
+import com.cropDetails.Model.Crop;
+import com.cropDetails.Repository.CropRepository;
+
+@Service
+public class CropServImpl implements ICropService {
+	
+
+	@Autowired
+	CropRepository repo;
+	@Override
+	public List<Crop> viewAllCrops() throws NoCropFoundException{
+		List<Crop> l=repo.findAll();
+		if(l.isEmpty()) {
+			throw new NoCropFoundException();
+		}
+		return l;
+	}
+
+	@Override
+	public Optional<Crop> addCrop(Crop crop)throws CropAlreadyExistException {
+		Optional<Crop> c=repo.findById(crop.getCId());
+		if(c.isPresent()) {
+			throw new CropAlreadyExistException();
+		}
+		Crop cr=repo.save(crop);
+		return Optional.of(cr);
+	}
+
+	@Override
+	public Boolean deleteCropById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Optional<Crop> updateCrop(Crop crop) {
+		// TODO Auto-generated method stub
+		return Optional.empty();
+	}
+
+}

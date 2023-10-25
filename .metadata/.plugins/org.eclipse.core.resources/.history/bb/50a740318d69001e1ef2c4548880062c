@@ -1,0 +1,80 @@
+package com.cropDetails.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cropDetails.Exceptions.UserAlreadyExistsException;
+
+import com.cropDetails.Exceptions.UserNotRegisteredException;
+import com.cropDetails.Exceptions.NoUserFoundException;
+import com.cropDetails.Model.Farmer;
+import com.cropDetails.Repository.FarmerRepo;
+
+@Service
+public class UserServiceImpl implements IFarmerService{
+	@Autowired
+	FarmerRepo repo;
+
+	@Override
+	public Optional<Farmer> addfarmer(Farmer farmer)throws UserAlreadyExistsException {
+		Optional<Farmer> f=repo.findById(farmer.getFId());
+		if(f.isPresent()) {
+			throw new UserAlreadyExistsException();
+		}
+		Farmer far=repo.save(farmer);
+		return  Optional.of(far);
+	}
+
+	@Override
+	public Optional<Farmer> viewFarmerById(int id) throws UserNotRegisteredException  {
+		Optional<Farmer>f=repo.findById(id);
+		if(f.isEmpty()) {
+			throw new UserNotRegisteredException ();
+		}
+		
+		return f;
+	}
+
+	
+
+	@Override
+	public List<Farmer> viewAllFarmers() throws NoUserFoundException {
+		
+		List<Farmer> l=repo.findAll();
+		if(l.isEmpty()) {
+			throw new NoUserFoundException();
+		}
+		return l;
+				
+	}
+
+	@Override
+	public Optional<Farmer> updateFarmer(Farmer farmer)throws UserNotRegisteredException {
+		Optional<Farmer> f=repo.findById(farmer.getFId());
+		if(f.isEmpty()) {
+			throw new UserNotRegisteredException();
+		}
+		Farmer far=repo.save(farmer);
+		return Optional.of(far);
+	}
+
+	@Override
+	public Boolean deleteFarmerById(int id) throws UserNotRegisteredException {
+		Optional<Farmer> f=repo.findById(id);
+		if(f.isEmpty()) {
+			throw new UserNotRegisteredException();
+			
+		}
+		repo.deleteById(id);
+		return true;
+	}
+
+
+	
+
+	
+
+}

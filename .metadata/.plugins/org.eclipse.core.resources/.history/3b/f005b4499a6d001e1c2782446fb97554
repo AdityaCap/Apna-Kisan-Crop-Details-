@@ -1,0 +1,53 @@
+package com.cropDetails.User.Controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cropDetails.User.Clients.InvoiceClient;
+import com.cropDetails.User.Dto.Invoice;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@RestController
+@RequestMapping("/invoice")
+@EnableFeignClients(basePackages = "com.CropDetails.User.Clients")
+public class InvoiceClientController {
+	@Autowired
+	InvoiceClient client;
+	
+	@PreAuthorize("hasAnyRole('ADMIN','DEALER')")
+	@PostMapping("/generate")
+    public ResponseEntity<Invoice> generateInvoice(@RequestBody Invoice invoice){
+		log.info("Invoice being generated with id ");
+		return new ResponseEntity<Invoice>(client.generateInvoice(invoice).getBody(),HttpStatus.CREATED);
+	}
+
+	@PreAuthorize("hasAnyRole('ADMIN','DEALER')")
+	@DeleteMapping("/cancel/{invoiceId}")
+    public ResponseEntity<Boolean> cancelInvoice(@PathVariable int invoiceId){
+		log.info("Deleting invoice with id "+invoiceId);
+		return new ResponseEntity<Boolean>(client.cancelInvoice(invoiceId).getBody(),HttpStatus.OK);
+	}
+	
+	@PreAuthorize("hasAnyRole('ADMIN','DEALER')")
+	@GetMapping("/all")
+    public ResponseEntity<List<Invoice>> getAllInvoices(){
+		log.info("Showing all the list of invoices");
+		System.out.println(client.getAllInvoices().getBody());
+		return new ResponseEntity<List<Invoice>>(client.getAllInvoices().getBody(),HttpStatus.OK);
+	}
+
+}

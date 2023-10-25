@@ -1,0 +1,6 @@
+package com.cropDetails.Invoice.Dto;
+
+public class Crop {
+	private int cId;
+
+}

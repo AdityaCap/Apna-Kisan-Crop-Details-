@@ -1,0 +1,28 @@
+package com.cropDetails.User.Controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cropDetails.User.Clients.CropClient;
+import com.cropDetails.User.Dto.Crop;
+
+@RestController
+@EnableFeignClients(basePackages = "com.CropDetails.User.*")
+public class CropDtoController {
+	@Autowired
+	CropClient cropClient;
+	@PreAuthorize(value = "Farmer")
+	@GetMapping("/getAllCrops")
+	public List<Crop>getAllCrops(){
+		 return cropClient.viewAllCrops();			
+	}
+	 
+	
+	
+
+}

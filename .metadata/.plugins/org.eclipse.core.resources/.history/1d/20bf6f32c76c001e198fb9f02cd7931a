@@ -1,0 +1,5 @@
+package com.cropDetails.Dto;
+
+public class Crop {
+
+}

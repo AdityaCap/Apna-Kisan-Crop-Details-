@@ -1,0 +1,5 @@
+package com.cropDetails.User.ErrorDecoder;
+
+public class CustomErrorDecoder {
+
+}

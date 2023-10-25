@@ -1,0 +1,13 @@
+package com.cropDetails.Repository;
+
+import java.util.Optional;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import com.cropDetails.Model.Crop;
+
+public interface CropRepository extends MongoRepository<Crop,Integer>{
+
+	Optional<Crop> findByName(String name);
+
+}

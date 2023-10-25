@@ -1,0 +1,5 @@
+package com.cropDetails.Clients;
+
+public interface UserClient {
+
+}

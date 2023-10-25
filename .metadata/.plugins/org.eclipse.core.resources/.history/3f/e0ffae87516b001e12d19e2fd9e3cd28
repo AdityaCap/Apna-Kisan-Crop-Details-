@@ -1,0 +1,9 @@
+package com.cropDetails.User.Repository;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import com.cropDetails.User.Model.User;
+
+public interface UserRepo extends MongoRepository<User, Integer> {
+
+}

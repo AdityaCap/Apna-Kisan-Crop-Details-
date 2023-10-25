@@ -1,0 +1,12 @@
+1697363828991	Rename package 'com.cropDetails.Service'
+1697363848434	Rename package 'com.cropDetails.Repository'
+1697363863676	Rename package 'com.cropDetails.Model'
+1697363879452	Rename package 'com.cropDetails.Exceptions'
+1697363892523	Rename package 'com.cropDetails.ExceptionHandler'
+1697363904613	Rename package 'com.cropDetails.Enums'
+1697363917393	Rename package 'com.cropDetails.Controller'
+1697535378320	Delete element
+1697559513709	Rename type 'CropDtoController'
+1697603647040	Delete element
+1697604867693	Copy compilation unit
+1697619922727	Rename type 'InvoiceController'

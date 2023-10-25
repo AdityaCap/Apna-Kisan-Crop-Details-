@@ -1,0 +1,5 @@
+package com.cropDetails.User.Config;
+
+public class SecurityConfig {
+
+}
