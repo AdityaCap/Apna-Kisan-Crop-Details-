@@ -1,0 +1,4 @@
+
+	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.b e030bec04b111fbb1c92070e5116b1f1h
+r
+java:S1128">Remove this unused import 'com.cropDetails.User.Enums.Gender'.b 5591f0bb3449588cfc56d4425d1cbfeah

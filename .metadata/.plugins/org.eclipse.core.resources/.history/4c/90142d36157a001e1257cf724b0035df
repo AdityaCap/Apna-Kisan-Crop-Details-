@@ -1,0 +1,11 @@
+package com.cropDetails.Invoice.ErrorDecoder;
+
+import feign.FeignException;
+import feign.Request;
+import feign.Response;
+
+public class CustomFeignException extends FeignException {
+    public CustomFeignException(String methodKey, Request request, Response response) {
+        super(response.status(), response.reason(), methodKey, request, response);
+    }
+}

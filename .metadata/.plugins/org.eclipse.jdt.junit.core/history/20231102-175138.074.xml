@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="crop-service (1)" project="crop-service" tests="28" started="28" failures="0" errors="0" ignored="0">
+  <testsuite name="com.cropDetails.Testing.NoSubscriptionFoundExceptionTest" time="0.0" displayname="NoSubscriptionFoundExceptionTest" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.NoSubscriptionFoundExceptionTest]">
+    <testcase name="testNoSubscriptionFoundException" classname="com.cropDetails.Testing.NoSubscriptionFoundExceptionTest" time="0.0" displayname="testNoSubscriptionFoundException()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.NoSubscriptionFoundExceptionTest]/[method:testNoSubscriptionFoundException()]"/>
+  </testsuite>
+  <testsuite name="com.cropDetails.Testing.SubscriptionAlreadyExistsExceptionTest" time="0.0" displayname="SubscriptionAlreadyExistsExceptionTest" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.SubscriptionAlreadyExistsExceptionTest]">
+    <testcase name="testSubscriptionAlreadyExistsException" classname="com.cropDetails.Testing.SubscriptionAlreadyExistsExceptionTest" time="0.0" displayname="testSubscriptionAlreadyExistsException()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.SubscriptionAlreadyExistsExceptionTest]/[method:testSubscriptionAlreadyExistsException()]"/>
+  </testsuite>
+  <testsuite name="com.cropDetails.Testing.ResourceNotFoundExceptionTest" time="0.0" displayname="ResourceNotFoundExceptionTest" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.ResourceNotFoundExceptionTest]">
+    <testcase name="testResourceNotFoundExceptionWithMessage" classname="com.cropDetails.Testing.ResourceNotFoundExceptionTest" time="0.0" displayname="testResourceNotFoundExceptionWithMessage()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.ResourceNotFoundExceptionTest]/[method:testResourceNotFoundExceptionWithMessage()]"/>
+    <testcase name="testResourceNotFoundException" classname="com.cropDetails.Testing.ResourceNotFoundExceptionTest" time="0.0" displayname="testResourceNotFoundException()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.ResourceNotFoundExceptionTest]/[method:testResourceNotFoundException()]"/>
+    <testcase name="testResourceNotFoundExceptionMessage" classname="com.cropDetails.Testing.ResourceNotFoundExceptionTest" time="0.0" displayname="testResourceNotFoundExceptionMessage()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.ResourceNotFoundExceptionTest]/[method:testResourceNotFoundExceptionMessage()]"/>
+  </testsuite>
+  <testsuite name="com.cropDetails.Testing.CropServImplTest" time="3.256" displayname="CropServImplTest" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropServImplTest]">
+    <testcase name="testGetCropByName" classname="com.cropDetails.Testing.CropServImplTest" time="3.114" displayname="testGetCropByName()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropServImplTest]/[method:testGetCropByName()]"/>
+    <testcase name="testGetCropByType" classname="com.cropDetails.Testing.CropServImplTest" time="0.006" displayname="testGetCropByType()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropServImplTest]/[method:testGetCropByType()]"/>
+    <testcase name="testViewAllCrops" classname="com.cropDetails.Testing.CropServImplTest" time="0.006" displayname="testViewAllCrops()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropServImplTest]/[method:testViewAllCrops()]"/>
+    <testcase name="testAddCrop" classname="com.cropDetails.Testing.CropServImplTest" time="0.01" displayname="testAddCrop()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropServImplTest]/[method:testAddCrop()]"/>
+    <testcase name="testSubscribeToCrop" classname="com.cropDetails.Testing.CropServImplTest" time="0.078" displayname="testSubscribeToCrop()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropServImplTest]/[method:testSubscribeToCrop()]"/>
+    <testcase name="testDeleteCropById" classname="com.cropDetails.Testing.CropServImplTest" time="0.004" displayname="testDeleteCropById()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropServImplTest]/[method:testDeleteCropById()]"/>
+    <testcase name="testUpdateCrop" classname="com.cropDetails.Testing.CropServImplTest" time="0.006" displayname="testUpdateCrop()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropServImplTest]/[method:testUpdateCrop()]"/>
+    <testcase name="testGetCropById" classname="com.cropDetails.Testing.CropServImplTest" time="0.005" displayname="testGetCropById()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropServImplTest]/[method:testGetCropById()]"/>
+    <testcase name="testDeleteSubscriptionById" classname="com.cropDetails.Testing.CropServImplTest" time="0.004" displayname="testDeleteSubscriptionById()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropServImplTest]/[method:testDeleteSubscriptionById()]"/>
+    <testcase name="testGetAllCropsByUserId" classname="com.cropDetails.Testing.CropServImplTest" time="0.005" displayname="testGetAllCropsByUserId()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropServImplTest]/[method:testGetAllCropsByUserId()]"/>
+    <testcase name="testGetSubscription" classname="com.cropDetails.Testing.CropServImplTest" time="0.006" displayname="testGetSubscription()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropServImplTest]/[method:testGetSubscription()]"/>
+  </testsuite>
+  <testsuite name="com.cropDetails.Testing.CropAlreadyExistExceptionTest" time="0.001" displayname="CropAlreadyExistExceptionTest" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropAlreadyExistExceptionTest]">
+    <testcase name="testCropAlreadyExistException" classname="com.cropDetails.Testing.CropAlreadyExistExceptionTest" time="0.001" displayname="testCropAlreadyExistException()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropAlreadyExistExceptionTest]/[method:testCropAlreadyExistException()]"/>
+  </testsuite>
+  <testsuite name="com.cropDetails.Testing.CropControllerTest" time="0.591" displayname="CropControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropControllerTest]">
+    <testcase name="testAddInvalidCrop" classname="com.cropDetails.Testing.CropControllerTest" time="0.456" displayname="testAddInvalidCrop()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropControllerTest]/[method:testAddInvalidCrop()]"/>
+    <testcase name="testAddValidCrop" classname="com.cropDetails.Testing.CropControllerTest" time="0.111" displayname="testAddValidCrop()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropControllerTest]/[method:testAddValidCrop()]"/>
+    <testcase name="testUpdateValidCrop" classname="com.cropDetails.Testing.CropControllerTest" time="0.01" displayname="testUpdateValidCrop()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropControllerTest]/[method:testUpdateValidCrop()]"/>
+    <testcase name="testUpdateInvalidCrop" classname="com.cropDetails.Testing.CropControllerTest" time="0.01" displayname="testUpdateInvalidCrop()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropControllerTest]/[method:testUpdateInvalidCrop()]"/>
+  </testsuite>
+  <testsuite name="com.cropDetails.Testing.CropSubscriptionTest" time="0.012" displayname="CropSubscriptionTest" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropSubscriptionTest]">
+    <testcase name="testValidCropSubscription" classname="com.cropDetails.Testing.CropSubscriptionTest" time="0.012" displayname="testValidCropSubscription()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropSubscriptionTest]/[method:testValidCropSubscription()]"/>
+  </testsuite>
+  <testsuite name="com.cropDetails.Testing.NoCropRegisteredExceptionTest" time="0.001" displayname="NoCropRegisteredExceptionTest" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.NoCropRegisteredExceptionTest]">
+    <testcase name="testNoCropRegisteredException" classname="com.cropDetails.Testing.NoCropRegisteredExceptionTest" time="0.001" displayname="testNoCropRegisteredException()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.NoCropRegisteredExceptionTest]/[method:testNoCropRegisteredException()]"/>
+  </testsuite>
+  <testsuite name="com.cropDetails.Testing.NoCropFoundExceptionTest" time="0.001" displayname="NoCropFoundExceptionTest" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.NoCropFoundExceptionTest]">
+    <testcase name="testNoCropFoundException" classname="com.cropDetails.Testing.NoCropFoundExceptionTest" time="0.001" displayname="testNoCropFoundException()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.NoCropFoundExceptionTest]/[method:testNoCropFoundException()]"/>
+  </testsuite>
+  <testsuite name="com.cropDetails.Testing.NoUserFoundExceptionTest" time="0.001" displayname="NoUserFoundExceptionTest" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.NoUserFoundExceptionTest]">
+    <testcase name="testNoUserFoundException" classname="com.cropDetails.Testing.NoUserFoundExceptionTest" time="0.001" displayname="testNoUserFoundException()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.NoUserFoundExceptionTest]/[method:testNoUserFoundException()]"/>
+  </testsuite>
+  <testsuite name="com.cropDetails.Testing.UserNotRegisteredExceptionTest" time="0.001" displayname="UserNotRegisteredExceptionTest" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.UserNotRegisteredExceptionTest]">
+    <testcase name="testUserNotRegisteredException" classname="com.cropDetails.Testing.UserNotRegisteredExceptionTest" time="0.001" displayname="testUserNotRegisteredException()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.UserNotRegisteredExceptionTest]/[method:testUserNotRegisteredException()]"/>
+  </testsuite>
+  <testsuite name="com.cropDetails.Testing.CropTest" time="0.01" displayname="CropTest" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropTest]">
+    <testcase name="testValidCrop" classname="com.cropDetails.Testing.CropTest" time="0.01" displayname="testValidCrop()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropTest]/[method:testValidCrop()]"/>
+  </testsuite>
+  <testsuite name="com.cropDetails.CropDetailsApplicationTests" time="0.005" displayname="CropDetailsApplicationTests" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.CropDetailsApplicationTests]">
+    <testcase name="contextLoads" classname="com.cropDetails.CropDetailsApplicationTests" time="0.005" displayname="contextLoads()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.CropDetailsApplicationTests]/[method:contextLoads()]"/>
+  </testsuite>
+</testrun>

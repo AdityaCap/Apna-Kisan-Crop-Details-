@@ -1,0 +1,165 @@
+package com.cropDetails.Testing;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import com.cropDetails.Controller.CropController;
+import com.cropDetails.Exceptions.CropAlreadyExistException;
+import com.cropDetails.Exceptions.NoCropFoundException;
+import com.cropDetails.Exceptions.NoCropRegisteredException;
+import com.cropDetails.Exceptions.NoSubscriptionFoundException;
+import com.cropDetails.Exceptions.NoUserFoundException;
+import com.cropDetails.Exceptions.NotDealerException;
+import com.cropDetails.Exceptions.SubscriptionAlreadyExistsException;
+import com.cropDetails.Exceptions.UserNotRegisteredException;
+import com.cropDetails.Model.Crop;
+import com.cropDetails.Model.CropSubscription;
+import com.cropDetails.Service.ICropService;
+
+public class CropControllerTest {
+
+    private CropController cropController;
+    private ICropService cropService;
+
+    @BeforeEach
+    public void setUp() {
+        cropService = Mockito.mock(ICropService.class);
+        cropController = new CropController();
+    }
+
+    @Test
+    public void testViewAllCrops() throws NoCropFoundException {
+        List<Crop> crops = Arrays.asList(new Crop(), new Crop());
+        Mockito.when(cropService.viewAllCrops()).thenReturn(crops);
+
+        ResponseEntity<List<Crop> response = cropController.viewAllCrops();
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(crops, response.getBody());
+    }
+
+    @Test
+    public void testAddCrop() throws CropAlreadyExistException {
+        Crop crop = new Crop();
+        Mockito.when(cropService.addCrop(crop)).thenReturn(Optional.of(crop));
+
+        ResponseEntity<Crop> response = cropController.addCrop(crop);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(crop, response.getBody());
+    }
+
+    @Test
+    public void testDeleteCropById() throws NoCropRegisteredException {
+        int id = 1;
+        Mockito.when(cropService.deleteCropById(id)).thenReturn(true);
+
+        ResponseEntity<Boolean> response = cropController.deleteCropById(id);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertTrue(response.getBody());
+    }
+
+    @Test
+    public void testUpdateCrop() throws NoCropRegisteredException {
+        Crop crop = new Crop();
+        Mockito.when(cropService.updateCrop(crop)).thenReturn(Optional.of(crop));
+
+        ResponseEntity<Crop> response = cropController.updateCrop(crop);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(crop, response.getBody());
+    }
+
+    @Test
+    public void testGetCropById() throws NoCropRegisteredException {
+        int id = 1;
+        Crop crop = new Crop();
+        Mockito.when(cropService.getCropById(id)).thenReturn(Optional.of(crop));
+
+        ResponseEntity<Crop> response = cropController.getCropById(id);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(crop, response.getBody());
+    }
+
+    @Test
+    public void testGetCropByName() throws NoCropRegisteredException {
+        String name = "SampleCrop";
+        Crop crop = new Crop();
+        Mockito.when(cropService.getCropByName(name)).thenReturn(Optional.of(crop));
+
+        ResponseEntity<Crop> response = cropController.getCropByName(name);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(crop, response.getBody());
+    }
+
+    @Test
+    public void testGetCropByType() throws NoCropRegisteredException {
+        String type = "Fruit";
+        List<Crop> crops = Arrays.asList(new Crop(), new Crop());
+        Mockito.when(cropService.getCropByType(type)).thenReturn(crops);
+
+        ResponseEntity<List<Crop> response = cropController.getCropByType(type);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(crops, response.getBody());
+    }
+
+    @Test
+    public void testSubscribeToCrop() throws SubscriptionAlreadyExistsException, NotDealerException {
+        CropSubscription subscription = new CropSubscription();
+        Mockito.doNothing().when(cropService).subscribeToCrop(subscription);
+
+        ResponseEntity<String> response = cropController.subscribeToCrop(subscription);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals("Subscription successful.", response.getBody());
+    }
+
+    @Test
+    public void testGetSubscription() throws NoSubscriptionFoundException {
+        List<CropSubscription> subscriptions = Arrays.asList(new CropSubscription(), new CropSubscription());
+        Mockito.when(cropService.getSubscription()).thenReturn(subscriptions);
+
+        ResponseEntity<List<CropSubscription> response = cropController.getSubscription();
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(subscriptions, response.getBody());
+    }
+
+    @Test
+    public void testDeleteSubscriptionById() throws NoSubscriptionFoundException {
+        int id = 1;
+        Mockito.when(cropService.deleteSubscriptionById(id)).thenReturn(true);
+
+        ResponseEntity<Boolean> response = cropController.deleteSubscriptionById(id);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertTrue(response.getBody());
+    }
+
+    @Test
+    public void testGetAllCropsByUserId() throws NoUserFoundException, UserNotRegisteredException, NoCropFoundException {
+        int uid = 1;
+        List<Crop> crops = Arrays.asList(new Crop(), new Crop());
+        Mockito.when(cropService.getAllCropsByUserId(uid)).thenReturn(crops);
+
+        ResponseEntity<List<Crop> response = cropController.getAllCropsByUserId(uid);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(crops, response.getBody());
+    }
+
+    // Add more test methods for other controller methods
+}

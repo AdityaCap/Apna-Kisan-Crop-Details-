@@ -7,9 +7,9 @@ import com.cropDetails.Exceptions.CropAlreadyExistException;
 import com.cropDetails.Exceptions.NoCropFoundException;
 import com.cropDetails.Exceptions.NoCropRegisteredException;
 import com.cropDetails.Exceptions.NoSubscriptionFoundException;
-import com.cropDetails.Exceptions.NoUserFoundException;
 import com.cropDetails.Exceptions.NotDealerException;
 import com.cropDetails.Exceptions.SubscriptionAlreadyExistsException;
+import com.cropDetails.Exceptions.UserNotRegisteredException;
 import com.cropDetails.Model.Crop;
 import com.cropDetails.Model.CropSubscription;
 
@@ -25,5 +25,5 @@ public interface ICropService {
 	public void subscribeToCrop(CropSubscription sub) throws SubscriptionAlreadyExistsException, NotDealerException;
 	List<CropSubscription> getSubscription()throws NoSubscriptionFoundException;
 	Boolean deleteSubscriptionById(int id)throws NoSubscriptionFoundException;
-	List<Crop> getAllCropsByUserId(int uid)throws NoUserFoundException;
+	List<Crop> getAllCropsByUserId(int uid)throws UserNotRegisteredException,NoCropFoundException;
 }

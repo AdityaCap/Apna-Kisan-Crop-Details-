@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="InvoiceNotRegisteredExceptionTest" project="invoice-service" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.cropDetails.Invoice.ExceptionsTest.InvoiceNotRegisteredExceptionTest" time="0.012" displayname="InvoiceNotRegisteredExceptionTest" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.ExceptionsTest.InvoiceNotRegisteredExceptionTest]">
+    <testcase name="testInvoiceNotRegisteredException" classname="com.cropDetails.Invoice.ExceptionsTest.InvoiceNotRegisteredExceptionTest" time="0.012" displayname="testInvoiceNotRegisteredException()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.ExceptionsTest.InvoiceNotRegisteredExceptionTest]/[method:testInvoiceNotRegisteredException()]"/>
+  </testsuite>
+</testrun>

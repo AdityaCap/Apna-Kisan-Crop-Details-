@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="crop-service (1)" project="crop-service" tests="16" started="16" failures="0" errors="0" ignored="0">
+  <testsuite name="com.cropDetails.Testing.CropServImplTest" time="4.026" displayname="CropServImplTest" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropServImplTest]">
+    <testcase name="testGetCropByName" classname="com.cropDetails.Testing.CropServImplTest" time="3.878" displayname="testGetCropByName()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropServImplTest]/[method:testGetCropByName()]"/>
+    <testcase name="testGetCropByType" classname="com.cropDetails.Testing.CropServImplTest" time="0.007" displayname="testGetCropByType()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropServImplTest]/[method:testGetCropByType()]"/>
+    <testcase name="testViewAllCrops" classname="com.cropDetails.Testing.CropServImplTest" time="0.007" displayname="testViewAllCrops()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropServImplTest]/[method:testViewAllCrops()]"/>
+    <testcase name="testAddCrop" classname="com.cropDetails.Testing.CropServImplTest" time="0.014" displayname="testAddCrop()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropServImplTest]/[method:testAddCrop()]"/>
+    <testcase name="testSubscribeToCrop" classname="com.cropDetails.Testing.CropServImplTest" time="0.072" displayname="testSubscribeToCrop()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropServImplTest]/[method:testSubscribeToCrop()]"/>
+    <testcase name="testDeleteCropById" classname="com.cropDetails.Testing.CropServImplTest" time="0.005" displayname="testDeleteCropById()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropServImplTest]/[method:testDeleteCropById()]"/>
+    <testcase name="testUpdateCrop" classname="com.cropDetails.Testing.CropServImplTest" time="0.007" displayname="testUpdateCrop()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropServImplTest]/[method:testUpdateCrop()]"/>
+    <testcase name="testGetCropById" classname="com.cropDetails.Testing.CropServImplTest" time="0.005" displayname="testGetCropById()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropServImplTest]/[method:testGetCropById()]"/>
+    <testcase name="testDeleteSubscriptionById" classname="com.cropDetails.Testing.CropServImplTest" time="0.006" displayname="testDeleteSubscriptionById()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropServImplTest]/[method:testDeleteSubscriptionById()]"/>
+    <testcase name="testGetAllCropsByUserId" classname="com.cropDetails.Testing.CropServImplTest" time="0.008" displayname="testGetAllCropsByUserId()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropServImplTest]/[method:testGetAllCropsByUserId()]"/>
+    <testcase name="testGetSubscription" classname="com.cropDetails.Testing.CropServImplTest" time="0.005" displayname="testGetSubscription()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropServImplTest]/[method:testGetSubscription()]"/>
+  </testsuite>
+  <testsuite name="com.cropDetails.Testing.CropControllerTest" time="0.698" displayname="CropControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropControllerTest]">
+    <testcase name="testAddInvalidCrop" classname="com.cropDetails.Testing.CropControllerTest" time="0.542" displayname="testAddInvalidCrop()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropControllerTest]/[method:testAddInvalidCrop()]"/>
+    <testcase name="testAddValidCrop" classname="com.cropDetails.Testing.CropControllerTest" time="0.129" displayname="testAddValidCrop()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropControllerTest]/[method:testAddValidCrop()]"/>
+    <testcase name="testUpdateValidCrop" classname="com.cropDetails.Testing.CropControllerTest" time="0.011" displayname="testUpdateValidCrop()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropControllerTest]/[method:testUpdateValidCrop()]"/>
+    <testcase name="testUpdateInvalidCrop" classname="com.cropDetails.Testing.CropControllerTest" time="0.011" displayname="testUpdateInvalidCrop()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropControllerTest]/[method:testUpdateInvalidCrop()]"/>
+  </testsuite>
+  <testsuite name="com.cropDetails.CropDetailsApplicationTests" time="0.006" displayname="CropDetailsApplicationTests" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.CropDetailsApplicationTests]">
+    <testcase name="contextLoads" classname="com.cropDetails.CropDetailsApplicationTests" time="0.006" displayname="contextLoads()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.CropDetailsApplicationTests]/[method:contextLoads()]"/>
+  </testsuite>
+</testrun>

@@ -1,0 +1,75 @@
+package com.cropDetails.Testing;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import com.cropDetails.ExceptionHandler.CropExceptionHandler;
+
+public class CropExceptionHandlerTest {
+    private CropExceptionHandler cropExceptionHandler;
+
+    @BeforeEach
+    void setUp() {
+        cropExceptionHandler = new CropExceptionHandler();
+    }
+
+    @Test
+    public void testHandleCropNotRegisteredException() {
+        ResponseEntity<String> response = cropExceptionHandler.handleCropNotRegisteredException();
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertEquals("Crop is not registered with us ", response.getBody());
+    }
+
+    @Test
+    public void testHandleCropAlreadyExistException() {
+        ResponseEntity<String> response = cropExceptionHandler.handleCropAlreadyFoundException();
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertEquals("This Crop already exists with us ", response.getBody());
+    }
+
+    @Test
+    public void testHandleNoCropFoundException() {
+        ResponseEntity<String> response = cropExceptionHandler.handleNoCropFoundException();
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertEquals("There are no Crops registered .Please first add one ", response.getBody());
+    }
+
+    @Test
+    public void testHandleSubscriptionAlreadyExistsException() {
+        ResponseEntity<String> response = cropExceptionHandler.handleSubscriptionAlreadyExistsException();
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertEquals("Subscription already exists for this user and crop type.", response.getBody());
+    }
+
+    @Test
+    public void testHandleNoSubscriptionFoundException() {
+        ResponseEntity<String> response = cropExceptionHandler.handleNoSubscriptionFoundException();
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertEquals("No subscriptions found.", response.getBody());
+    }
+
+    @Test
+    public void testHandleNotDealerException() {
+        ResponseEntity<String> response = cropExceptionHandler.NotDealerException();
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertEquals("User is found but not a dealer.", response.getBody());
+    }
+
+    @Test
+    public void testHandleNoUserFoundException() {
+        ResponseEntity<String> response = cropExceptionHandler.NoUserFoundException();
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertEquals("No User Found.", response.getBody());
+    }
+
+    @Test
+    public void testHandleUserNotRegisteredException() {
+        ResponseEntity<String> response = cropExceptionHandler.handleCropNotRegisteredException();
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertEquals("No User is registered with us", response.getBody());
+    }
+}

@@ -1,0 +1,105 @@
+package com.cropDetails.Testing;
+
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+ 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+ 
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+ 
+import com.cropDetails.Controller.CropController;
+import com.cropDetails.Model.Crop;
+import com.cropDetails.Service.ICropService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+ 
+@WebMvcTest(CropController.class)
+public class CropControllerTest {
+ 
+    @Autowired
+    private MockMvc mockMvc;
+ 
+    @MockBean
+    private ICropService cropService;
+ 
+    @Test
+    public void testAddValidCrop() throws Exception {
+        // Create a sample valid Crop object
+        Crop crop = new Crop(1, 2, "ValidCrop", "Fruits", 10, 20, "Valid description");
+ 
+        // Mock the service to return the added crop
+        when(cropService.addCrop(any())).thenReturn(Optional.of(crop));
+ 
+        // Perform the POST request
+        mockMvc.perform(post("/crop/registerCrop")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(crop)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("ValidCrop"));
+    }
+ 
+    @Test
+    public void testAddInvalidCrop() throws Exception {
+        // Create a sample invalid Crop object with missing required fields
+        Crop crop = new Crop(1, 2, null, null, -1, -1, null);
+ 
+        // Mock the service not to add the crop (it should not be reached due to validation)
+        when(cropService.addCrop(any())).thenReturn(Optional.empty());
+ 
+        // Perform the POST request
+        mockMvc.perform(post("/crop/registerCrop")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(crop)))
+                .andExpect(status().isBadRequest());
+    }
+ 
+    @Test
+    public void testUpdateValidCrop() throws Exception {
+        // Create a sample valid Crop object
+        Crop crop = new Crop(1, 2, "ValidCrop", "Fruits", 10, 20, "Valid description");
+ 
+        // Mock the service to return the updated crop
+        when(cropService.updateCrop(any())).thenReturn(Optional.of(crop));
+ 
+        // Perform the PUT request
+        mockMvc.perform(put("/crop/update")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(crop)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("ValidCrop"));
+    }
+ 
+    @Test
+    public void testUpdateInvalidCrop() throws Exception {
+        // Create a sample invalid Crop object with missing required fields
+        Crop crop = new Crop(1, 2, null, null, -1, -1, null);
+ 
+        // Mock the service not to update the crop (it should not be reached due to validation)
+        when(cropService.updateCrop(any())).thenReturn(Optional.empty());
+ 
+        // Perform the PUT request
+        mockMvc.perform(put("/crop/update")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(crop)))
+                .andExpect(status().isBadRequest());
+    }
+ 
+    // Add more test cases for other controller methods
+ 
+    // Utility method to convert objects to JSON
+    private static String asJsonString(final Object obj) {
+        try {
+            final ObjectMapper mapper = new ObjectMapper();
+            return mapper.writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+}

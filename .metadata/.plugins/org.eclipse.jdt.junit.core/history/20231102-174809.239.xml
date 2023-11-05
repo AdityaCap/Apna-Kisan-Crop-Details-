@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="SubscriptionAlreadyExistsExceptionTest" project="crop-service" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.cropDetails.Testing.SubscriptionAlreadyExistsExceptionTest" time="0.021" displayname="SubscriptionAlreadyExistsExceptionTest" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.SubscriptionAlreadyExistsExceptionTest]">
+    <testcase name="testSubscriptionAlreadyExistsException" classname="com.cropDetails.Testing.SubscriptionAlreadyExistsExceptionTest" time="0.021" displayname="testSubscriptionAlreadyExistsException()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.SubscriptionAlreadyExistsExceptionTest]/[method:testSubscriptionAlreadyExistsException()]"/>
+  </testsuite>
+</testrun>

@@ -1,0 +1,8 @@
+
+z
+java:S2789$"FEnsure this "Optional" could never be null and remove this null-check.b aa7576b741535cf1399d937ad6f1ea43h
+ç	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.b 97d387835f0323e1fc8c438bf130e41ah
+|
+java:S3655*"HCall "user.isPresent()" or "!user.isEmpty()" before accessing the value.b ee11cbb19052e40b07aac0ca060c23eeh
+q
+java:S1128"=Remove this unused import 'com.cropDetails.User.Model.Login'.b 8e7202c97b697d094601434d8e174644h

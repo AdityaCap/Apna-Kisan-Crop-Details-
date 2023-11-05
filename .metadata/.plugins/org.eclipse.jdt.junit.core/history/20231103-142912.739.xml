@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="UserTest" project="invoice-service" tests="4" started="4" failures="0" errors="0" ignored="0">
+  <testsuite name="com.cropDetails.Invoice.DtoTestCases.UserTest" time="0.006" displayname="UserTest" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.DtoTestCases.UserTest]">
+    <testcase name="testSetterAndGetterMethods" classname="com.cropDetails.Invoice.DtoTestCases.UserTest" time="0.0" displayname="testSetterAndGetterMethods()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.DtoTestCases.UserTest]/[method:testSetterAndGetterMethods()]"/>
+    <testcase name="testConstructorWithArguments" classname="com.cropDetails.Invoice.DtoTestCases.UserTest" time="0.0" displayname="testConstructorWithArguments()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.DtoTestCases.UserTest]/[method:testConstructorWithArguments()]"/>
+    <testcase name="testToStringMethod" classname="com.cropDetails.Invoice.DtoTestCases.UserTest" time="0.003" displayname="testToStringMethod()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.DtoTestCases.UserTest]/[method:testToStringMethod()]"/>
+    <testcase name="testDefaultConstructor" classname="com.cropDetails.Invoice.DtoTestCases.UserTest" time="0.002" displayname="testDefaultConstructor()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.DtoTestCases.UserTest]/[method:testDefaultConstructor()]"/>
+  </testsuite>
+</testrun>

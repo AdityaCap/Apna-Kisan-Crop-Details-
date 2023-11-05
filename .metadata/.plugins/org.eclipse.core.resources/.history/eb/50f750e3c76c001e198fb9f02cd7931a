@@ -1,8 +1,0 @@
-package com.cropDetails.Invoice.Clients;
-
-import org.springframework.cloud.openfeign.FeignClient;
-
-@FeignClient(name="user-service",url="")
-public interface UserClient {
-
-}

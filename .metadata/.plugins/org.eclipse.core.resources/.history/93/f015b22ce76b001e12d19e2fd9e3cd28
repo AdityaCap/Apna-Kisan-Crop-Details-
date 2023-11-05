@@ -1,5 +1,0 @@
-package com.cropDetails.User.Response;
-
-public class JsonResponse {
-
-}

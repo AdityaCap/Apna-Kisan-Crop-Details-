@@ -1,0 +1,43 @@
+package com.cropDetails.Invoice.ErrorDecoder;
+
+import java.io.IOException;
+import java.nio.charset.Charset;
+
+import org.springframework.util.StreamUtils;
+
+import com.cropDetails.Invoice.Exceptions.ResourceNotFoundException;
+
+import feign.FeignException;
+import feign.Response;
+import feign.codec.ErrorDecoder;
+import feign.Request;
+
+public class CustomErrorDecoder implements ErrorDecoder {
+
+	@Override
+    public Exception decode(String methodKey, Response response) {
+        if (response.status() == 404) {
+            String responseBody = getResponseBody(response);
+            return new ResourceNotFoundException(responseBody);
+        }else if (response.status() == 500) {
+            // Throw a CustomFeignException for a 500 status code
+            Request request = response.request();
+            return new CustomFeignException(methodKey, request, response);
+        }
+        // Handle other errors or return default decoder
+        return FeignException.errorStatus(methodKey, response);
+    }
+
+ 
+
+    private String getResponseBody(Response response) {
+        try {
+            if (response.body() != null) {
+                return StreamUtils.copyToString(response.body().asInputStream(), Charset.defaultCharset());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "Resource not found"; // Default message if the response body is empty
+    }
+}

@@ -1,0 +1,46 @@
+package com.cropDetails.Testing;
+
+import com.cropDetails.ExceptionHandler.CropExceptionHandler;
+import com.cropDetails.Exceptions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class CropExceptionHandlerTest {
+    private CropExceptionHandler cropExceptionHandler;
+
+    @BeforeEach
+    void setUp() {
+        cropExceptionHandler = new CropExceptionHandler();
+    }
+
+    @Test
+    public void testHandleCropNotRegisteredException() {
+        ResponseEntity<String> response = cropExceptionHandler.handleCropNotRegisteredException();
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertEquals("Crop is not registered with us", response.getBody());
+    }
+
+    @Test
+    public void testHandleCropAlreadyExistException() {
+        ResponseEntity<String> response = cropExceptionHandler.handleCropAlreadyFoundException();
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertEquals("This Crop already exists with us", response.getBody());
+    }
+
+    @Test
+    public void testHandleNoCropFoundException() {
+        ResponseEntity<String> response = cropExceptionHandler.handleNoCropFoundException();
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertEquals("There are no Crops registered. Please first add one", response.getBody());
+    }
+
+    @Test
+    public void testHandleSubscriptionAlreadyExistsException() {
+        ResponseEntity<String> response = cropExceptionHandler.handleSubscriptionAlreadyExistsException();
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertEquals("Subscription already exists for this user and
+

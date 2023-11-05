@@ -1,5 +1,0 @@
-package com.cropDetails.Invoice.ExceptionHandler;
-
-public class InvoiceExceptionsHandler {
-
-}

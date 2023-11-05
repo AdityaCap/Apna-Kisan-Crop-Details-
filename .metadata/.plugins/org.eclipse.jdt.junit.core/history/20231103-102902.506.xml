@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="NotFarmerExceptionTest" project="invoice-service" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.cropDetails.Invoice.ExceptionsTest.NotFarmerExceptionTest" time="0.012" displayname="NotFarmerExceptionTest" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.ExceptionsTest.NotFarmerExceptionTest]">
+    <testcase name="testNotFarmerException" classname="com.cropDetails.Invoice.ExceptionsTest.NotFarmerExceptionTest" time="0.012" displayname="testNotFarmerException()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.ExceptionsTest.NotFarmerExceptionTest]/[method:testNotFarmerException()]"/>
+  </testsuite>
+</testrun>

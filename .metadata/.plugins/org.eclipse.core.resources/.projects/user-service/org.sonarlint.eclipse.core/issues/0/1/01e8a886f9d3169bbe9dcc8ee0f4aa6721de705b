@@ -1,0 +1,11 @@
+
+ç
+java:S2293<"YReplace the type specification in this constructor call with the diamond operator ("<>").b 875f60bb968502ad88f9f55b46ab796ah
+ç
+java:S2293T"YReplace the type specification in this constructor call with the diamond operator ("<>").b aa884d73d457b0e7b5a25a6d0d70a1ebh
+ç	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.b c018735db9ca6fdea76d841c376d54b7h
+t
+java:S46840"@Replace this persistent entity with a simple POJO or DTO object.b e5f96ae00443877315fbb64fd3d90005h
+^	java:S1064"+Replace this use of System.out by a logger.b bb1c3f2ea781263d3a2bb92b06a2061fh
+^	java:S1066"+Replace this use of System.out by a logger.b bb1c3f2ea781263d3a2bb92b06a2061fh
+^	java:S1069"+Replace this use of System.out by a logger.b bb1c3f2ea781263d3a2bb92b06a2061fh

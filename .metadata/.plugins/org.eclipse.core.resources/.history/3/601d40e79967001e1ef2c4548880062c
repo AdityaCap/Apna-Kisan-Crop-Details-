@@ -1,3 +1,0 @@
-server.port=8888
-spring.application.name=api-gateway
-eureka.instance.hostname=localhost

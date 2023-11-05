@@ -1,0 +1,173 @@
+package com.cropDetails.Invoice.ServiceTestCases;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.cropDetails.Invoice.Clients.CropClient;
+import com.cropDetails.Invoice.Clients.UserClient;
+import com.cropDetails.Invoice.Dto.Crop;
+import com.cropDetails.Invoice.Dto.User;
+import com.cropDetails.Invoice.Exceptions.InSufficentQuantityException;
+import com.cropDetails.Invoice.Exceptions.InvoiceNotFoundException;
+import com.cropDetails.Invoice.Exceptions.InvoiceNotRegisteredException;
+import com.cropDetails.Invoice.Exceptions.NoCropsFoundException;
+import com.cropDetails.Invoice.Exceptions.NotFarmerException;
+import com.cropDetails.Invoice.Model.Invoice;
+import com.cropDetails.Invoice.Repository.InvoiceRepository;
+import com.cropDetails.Invoice.Service.InvoiceServiceImpl;
+
+@SpringBootTest
+public class InvoiceServiceImplTest {
+
+    @Mock
+    private InvoiceRepository invoiceRepository;
+
+    @Mock
+    private UserClient userClient;
+
+    @Mock
+    private CropClient cropClient;
+
+    @InjectMocks
+    private InvoiceServiceImpl invoiceService;
+
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+    }
+
+    @Test
+    public void testGenerateInvoice() {
+        Invoice sampleInvoice = createSampleInvoice();
+
+        User farmer = new User();
+        farmer.setUId(0);
+
+        User dealer = new User();
+        dealer.setUId(22);
+
+        Crop crop = createSampleCrop();
+
+        when(userClient.viewUserById(0)).thenReturn(farmer);
+        when(userClient.viewUserById(22)).thenReturn(dealer);
+        when(cropClient.getCropById(0)).thenReturn(crop);
+        when(invoiceRepository.save(sampleInvoice)).thenReturn(sampleInvoice);
+
+        Optional<Invoice> generatedInvoice = invoiceService.generateInvoice(sampleInvoice);
+
+        assertEquals(sampleInvoice, generatedInvoice.get());
+    }
+
+    @Test
+    public void testCancelInvoice() throws InvoiceNotFoundException {
+        int invoiceId = 1;
+        Invoice sampleInvoice = createSampleInvoice();
+        when(invoiceRepository.findById(invoiceId)).thenReturn(Optional.of(sampleInvoice));
+
+        boolean result = invoiceService.cancelInvoice(invoiceId);
+        assertTrue(result);
+        verify(invoiceRepository).deleteById(invoiceId);
+    }
+
+    @Test
+    public void testCancelInvoice_InvoiceNotFound() {
+        int invoiceId = 1;
+        when(invoiceRepository.findById(invoiceId)).thenReturn(Optional.empty());
+
+        assertThrows(InvoiceNotFoundException.class, () -> invoiceService.cancelInvoice(invoiceId));
+    }
+
+    @Test
+    public void testGetAllInvoices() throws InvoiceNotRegisteredException {
+        List<Invoice> invoiceList = List.of(createSampleInvoice());
+        when(invoiceRepository.findAll()).thenReturn(invoiceList);
+
+        List<Invoice> result = invoiceService.getAllInvoices();
+        assertEquals(invoiceList, result);
+    }
+
+    @Test
+    public void testGetAllInvoices_NoInvoicesFound() {
+        when(invoiceRepository.findAll()).thenReturn(List.of());
+
+        assertThrows(InvoiceNotRegisteredException.class, () -> invoiceService.getAllInvoices());
+    }
+
+    @Test
+    public void testBuyCrops() throws InSufficentQuantityException, NoCropsFoundException, NotFarmerException {
+        Invoice sampleInvoice = createSampleInvoice();
+        Crop crop = createSampleCrop();
+        crop.setUId(0);
+
+        when(cropClient.getCropById(0)).thenReturn(crop);
+
+        Optional<Invoice> result = invoiceService.buyCrops(sampleInvoice);
+
+        assertTrue(result.isPresent());
+        assertEquals(sampleInvoice.getDealerId(), result.get().getDealerId());
+        // Add more assertions based on your business logic
+    }
+
+    @Test
+    public void testBuyCrops_NotFarmerException() {
+        Invoice sampleInvoice = createSampleInvoice();
+        Crop crop = createSampleCrop();
+        crop.setUId(1);
+
+        when(cropClient.getCropById(0)).thenReturn(crop);
+
+        assertThrows(NotFarmerException.class, () -> invoiceService.buyCrops(sampleInvoice));
+    }
+
+    @Test
+    public void testBuyCrops_NoCropsFoundException() {
+        Invoice sampleInvoice = createSampleInvoice();
+
+        when(cropClient.getCropById(0)).thenReturn(null);
+
+        assertThrows(NoCropsFoundException.class, () -> invoiceService.buyCrops(sampleInvoice));
+    }
+
+    @Test
+    public void testBuyCrops_InsufficientQuantityException() {
+        Invoice sampleInvoice = createSampleInvoice();
+        Crop crop = createSampleCrop();
+        crop.setQuantity(0);
+
+        when(cropClient.getCropById(0)).thenReturn(crop);
+
+        assertThrows(InSufficentQuantityException.class, () -> invoiceService.buyCrops(sampleInvoice));
+    }
+
+    private Invoice createSampleInvoice() {
+        Invoice sampleInvoice = new Invoice();
+        sampleInvoice.setInvoiceId("653d176102960856fa0df7e8");
+        sampleInvoice.setFarmerId(0);
+        sampleInvoice.setDealerId(22);
+        sampleInvoice.setCropId(0);
+        sampleInvoice.setTotalCost(1500);
+        sampleInvoice.setQuantity(60);
+        sampleInvoice.setDateOfPurchase(new Date());
+        return sampleInvoice;
+    }
+
+    private Crop createSampleCrop() {
+        Crop sampleCrop = new Crop();
+        sampleCrop.setUId(0);
+        // Set other properties as needed
+        return sampleCrop;
+    }
+}

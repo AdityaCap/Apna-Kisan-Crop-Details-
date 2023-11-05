@@ -27,7 +27,7 @@ import com.cropDetails.User.Exceptions.ResourceAlreadyExistsException;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/crop")
 @EnableFeignClients(basePackages = "com.CropDetails.User.Clients")
@@ -35,13 +35,13 @@ public class CropClientController {
 	@Autowired
 	CropClient cropClient;
 	
-	//@PreAuthorize("hasAnyRole('FARMER','ADMIN','DEALER')")
+	@PreAuthorize("hasAnyRole('FARMER','ADMIN','DEALER')")
 	@GetMapping("/getAll")
 	public List<Crop>getAllCrops() {
 		 return cropClient.viewAllCrops();			
 	}
 	@PostMapping("/register")
-	//@PreAuthorize("hasAnyRole('FARMER')")
+	@PreAuthorize("hasAnyRole('FARMER')")
 	public ResponseEntity<Crop> addCrop(@Valid @RequestBody Crop crop) throws ResourceAlreadyExistsException, NoUserFoundException{
 		log.info("Saving.. " + crop);
 		Crop c=cropClient.addCrop(crop).getBody();
@@ -49,14 +49,14 @@ public class CropClientController {
 		
 	}
 
-	//@PreAuthorize("hasAnyRole('FARMER')")
+	@PreAuthorize("hasAnyRole('FARMER')")
 	@DeleteMapping("/deleteById/{id}")
 	public ResponseEntity<Boolean> deleteCropById(@PathVariable int id)throws ResourceAlreadyExistsException, NoUserFoundException{
 		log.info("deleting crop with id "+id);		
 		return new ResponseEntity<Boolean>(cropClient.deleteCropById(id).getBody(),HttpStatus.OK);
 	}
 	
-	//@PreAuthorize("hasAnyRole('FARMER')")
+	@PreAuthorize("hasAnyRole('FARMER')")
 	@PutMapping("/update")
 	public ResponseEntity<Crop> updateCrop(@Valid @RequestBody Crop crop)throws ResourceAlreadyExistsException, NoUserFoundException{
 		log.info("updating crop with id "+crop.getCId());
@@ -65,14 +65,14 @@ public class CropClientController {
 		
 	}
 
-	//@PreAuthorize("hasAnyRole('FARMER','ADMIN')")
+	@PreAuthorize("hasAnyRole('FARMER','ADMIN')")
 	@GetMapping("/getById/{id}")
 	public ResponseEntity<Crop> getCropById(@PathVariable int id)throws ResourceAlreadyExistsException, NoUserFoundException{
 		log.info("getting crop by id "+cropClient.getCropById(id).toString());
 		return new ResponseEntity<Crop>(cropClient.getCropById(id).getBody(),HttpStatus.OK);
 	}
 	
-	//@PreAuthorize("hasAnyRole('FARMER','ADMIN','DEALER')")
+	@PreAuthorize("hasAnyRole('FARMER','ADMIN','DEALER')")
 	@GetMapping("/getByName/{name}")
 	public ResponseEntity<Crop> getCropByName(@PathVariable String name)throws ResourceAlreadyExistsException, NoUserFoundException{
 		log.info("getting crop by id "+cropClient.getCropByName(name).toString());
@@ -80,7 +80,7 @@ public class CropClientController {
 
 	}
 
-	//@PreAuthorize("hasAnyRole('FARMER','ADMIN','DEALER')")
+	@PreAuthorize("hasAnyRole('FARMER','ADMIN','DEALER')")
 	@GetMapping("/getByType/{type}")
 	public ResponseEntity<List<Crop>> getCropByType(@PathVariable String type)throws ResourceAlreadyExistsException, NoUserFoundException{
 		log.info("getting crop by id "+cropClient.getCropByType(type).toString());
@@ -118,6 +118,7 @@ public class CropClientController {
 		return new ResponseEntity<List<Crop>>(cropClient.getAllCropsByUserId(uid).getBody(),HttpStatus.OK);
 		
 	}
+	
 
 	 
 	

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ResourceNotFoundExceptionTest (1)" project="invoice-service" tests="3" started="3" failures="0" errors="0" ignored="0">
+  <testsuite name="com.cropDetails.Invoice.ExceptionsTest.ResourceNotFoundExceptionTest" time="0.015" displayname="ResourceNotFoundExceptionTest" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.ExceptionsTest.ResourceNotFoundExceptionTest]">
+    <testcase name="testResourceNotFoundExceptionWithMessage" classname="com.cropDetails.Invoice.ExceptionsTest.ResourceNotFoundExceptionTest" time="0.011" displayname="testResourceNotFoundExceptionWithMessage()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.ExceptionsTest.ResourceNotFoundExceptionTest]/[method:testResourceNotFoundExceptionWithMessage()]"/>
+    <testcase name="testResourceNotFoundException" classname="com.cropDetails.Invoice.ExceptionsTest.ResourceNotFoundExceptionTest" time="0.001" displayname="testResourceNotFoundException()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.ExceptionsTest.ResourceNotFoundExceptionTest]/[method:testResourceNotFoundException()]"/>
+    <testcase name="testResourceNotFoundExceptionMessage" classname="com.cropDetails.Invoice.ExceptionsTest.ResourceNotFoundExceptionTest" time="0.002" displayname="testResourceNotFoundExceptionMessage()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.ExceptionsTest.ResourceNotFoundExceptionTest]/[method:testResourceNotFoundExceptionMessage()]"/>
+  </testsuite>
+</testrun>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="InSufficentQuantityExceptionTest" project="invoice-service" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.cropDetails.Invoice.ExceptionsTest.InSufficentQuantityExceptionTest" time="0.0" displayname="InSufficentQuantityExceptionTest" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.ExceptionsTest.InSufficentQuantityExceptionTest]">
+    <testcase name="testInSufficentQuantityException" classname="com.cropDetails.Invoice.ExceptionsTest.InSufficentQuantityExceptionTest" time="0.0" displayname="testInSufficentQuantityException()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.ExceptionsTest.InSufficentQuantityExceptionTest]/[method:testInSufficentQuantityException()]"/>
+  </testsuite>
+</testrun>

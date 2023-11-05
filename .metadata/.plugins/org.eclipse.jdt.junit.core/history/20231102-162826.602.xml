@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="user-service" project="user-service" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.cropDetails.User.UserServiceApplicationTests" time="1.41" displayname="UserServiceApplicationTests" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.User.UserServiceApplicationTests]">
+    <testcase name="contextLoads" classname="com.cropDetails.User.UserServiceApplicationTests" time="1.41" displayname="contextLoads()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.User.UserServiceApplicationTests]/[method:contextLoads()]"/>
+  </testsuite>
+</testrun>

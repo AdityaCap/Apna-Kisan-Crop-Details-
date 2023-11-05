@@ -14,37 +14,55 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cropDetails.Invoice.Exceptions.InSufficentQuantityException;
 import com.cropDetails.Invoice.Exceptions.InvoiceNotFoundException;
 import com.cropDetails.Invoice.Exceptions.InvoiceNotRegisteredException;
+import com.cropDetails.Invoice.Exceptions.NoCropsFoundException;
+import com.cropDetails.Invoice.Exceptions.NotFarmerException;
 import com.cropDetails.Invoice.Model.Invoice;
 import com.cropDetails.Invoice.Service.InvoiceService;
 
 import jakarta.validation.Valid;
+
 @RequestMapping("/invoice")
 @RestController
 public class InvoiceController {
-	
+
 	@Autowired
 	InvoiceService ser;
-	
+
+	public InvoiceController(InvoiceService ser) {
+		super();
+		this.ser=ser;
+
+	}
+
 	@PostMapping("/generate")
-    public ResponseEntity<Invoice> generateInvoice(@Valid @RequestBody Invoice invoice) {
-        Optional<Invoice> generatedInvoice = ser.generateInvoice(invoice);
-        if (generatedInvoice.isPresent()) {
-            return new ResponseEntity<>(generatedInvoice.get(), HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+	public ResponseEntity<Invoice> generateInvoice(@Valid @RequestBody Invoice invoice) {
+		Optional<Invoice> generatedInvoice = ser.generateInvoice(invoice);
+		if (generatedInvoice.isPresent()) {
+			return new ResponseEntity<>(generatedInvoice.get(), HttpStatus.CREATED);
+		} else {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
 	@DeleteMapping("/cancel/{invoiceId}")
-    public ResponseEntity<Boolean> cancelInvoice(@PathVariable int invoiceId) throws InvoiceNotFoundException {
-		return new ResponseEntity<Boolean>(ser.cancelInvoice(invoiceId),HttpStatus.OK);
-    }
+	public ResponseEntity<Boolean> cancelInvoice(@PathVariable int invoiceId) throws InvoiceNotFoundException {
+		return new ResponseEntity<Boolean>(ser.cancelInvoice(invoiceId), HttpStatus.OK);
+	}
+
 	@GetMapping("/all")
-    public ResponseEntity<List<Invoice>> getAllInvoices() throws InvoiceNotRegisteredException {
-        List<Invoice> invoices = ser.getAllInvoices();
-        return new ResponseEntity<>(invoices, HttpStatus.OK);
-    }
-	
+	public ResponseEntity<List<Invoice>> getAllInvoices() throws InvoiceNotRegisteredException {
+		List<Invoice> invoices = ser.getAllInvoices();
+		return new ResponseEntity<>(invoices, HttpStatus.OK);
+	}
+
+	@PostMapping("/buy")
+	public ResponseEntity<Invoice> createTicket(@RequestBody Invoice invoice)
+			throws InSufficentQuantityException, NoCropsFoundException, NotFarmerException {
+
+		return new ResponseEntity<Invoice>(ser.buyCrops(invoice).get(), HttpStatus.OK);
+	}
 
 }

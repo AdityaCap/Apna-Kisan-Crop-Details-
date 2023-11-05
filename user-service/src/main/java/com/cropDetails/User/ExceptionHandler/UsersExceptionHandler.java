@@ -13,13 +13,17 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.cropDetails.User.Exceptions.InSufficentQuantityException;
 import com.cropDetails.User.Exceptions.InvoiceNotFoundException;
 import com.cropDetails.User.Exceptions.InvoiceNotRegisteredException;
+import com.cropDetails.User.Exceptions.NoCropsFoundException;
 import com.cropDetails.User.Exceptions.NoDealersFoundException;
 import com.cropDetails.User.Exceptions.NoFarmersFoundExceptions;
 import com.cropDetails.User.Exceptions.NoUserFoundException;
 import com.cropDetails.User.Exceptions.NotDealerException;
+import com.cropDetails.User.Exceptions.NotFarmerException;
 import com.cropDetails.User.Exceptions.ResourceAlreadyExistsException;
+import com.cropDetails.User.Exceptions.ResourceNotFoundException;
 import com.cropDetails.User.Exceptions.UserAlreadyExistsException;
 import com.cropDetails.User.Exceptions.UserNotRegisteredException;
 
@@ -59,15 +63,6 @@ public class UsersExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<String>("User is found but not a dealer.", HttpStatus.NOT_FOUND);
 	}
 
-	@ExceptionHandler(Exception.class)
-	public ResponseEntity<ExceptionResponse> handleAllExceptions(Exception ex, WebRequest request) {
-		ExceptionResponse exceptionResponse = new ExceptionResponse(LocalDate.now(), ex.getMessage(),
-				request.getDescription(false), "Internal Server Error");
-		log.error("An exception occurred:", ex);
-//        log.error(ex.getMessage());
-		return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-	}
-
 	@ExceptionHandler(ResourceAlreadyExistsException.class)
 	public ResponseEntity<ExceptionResponse> handleResourceAlreadyExistException(ResourceAlreadyExistsException ex,
 			WebRequest request) {
@@ -80,25 +75,15 @@ public class UsersExceptionHandler extends ResponseEntityExceptionHandler {
 	@Override
 
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-
 			HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-
 		StringBuilder details = new StringBuilder();
-
 		for (FieldError error : ex.getBindingResult().getFieldErrors()) {
-
 			details.append(error.getField()).append(": ").append(error.getDefaultMessage()).append(". ");
-
 		}
-
 		ExceptionResponse exceptionResponse = new ExceptionResponse(LocalDate.now(), "Validation fails",
-
 				details.toString(), "Bad Request");
-
 		log.error("Validation fails:", ex);
-
 //        log.error(ex.getMessage());
-
 		return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
 
 	}
@@ -111,4 +96,32 @@ public class UsersExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<>("No invoices registered . Please do one ",HttpStatus.NOT_FOUND);
 	}
 
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public ResponseEntity<ExceptionResponse> handleResourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {
+		ExceptionResponse exceptionResponse = new ExceptionResponse(LocalDate.now(), ex.getMessage(),
+				request.getDescription(false), "Not Found");
+		log.error("Crops not found!\n" + ex.getMessage());
+		return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<ExceptionResponse> handleAllExceptions(Exception ex, WebRequest request) {
+		ExceptionResponse exceptionResponse = new ExceptionResponse(LocalDate.now(), ex.getMessage(),
+				request.getDescription(false), "Internal Server Error");
+		log.error("An exception occurred:", ex);
+//        log.error(ex.getMessage());
+		return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	@ExceptionHandler(InSufficentQuantityException.class)
+	public ResponseEntity<String>handleInsufficentQuantityException(){
+		return new ResponseEntity<>("In sufficent Quantity ",HttpStatus.NOT_ACCEPTABLE);
+	}
+	@ExceptionHandler(NoCropsFoundException.class)
+	public ResponseEntity<String>handleNoCropFoundException(){
+		return new ResponseEntity<>("No Crop Found with this id ",HttpStatus.NOT_FOUND);
+	}
+	@ExceptionHandler(NotFarmerException.class)
+	public ResponseEntity<String>handleNoctFramerException(){
+		return new ResponseEntity<>("There is no Farmer with Id ",HttpStatus.NOT_FOUND);
+	}
 }

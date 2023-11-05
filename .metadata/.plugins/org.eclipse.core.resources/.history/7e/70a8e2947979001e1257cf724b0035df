@@ -1,0 +1,6 @@
+package com.cropDetails.Testing;
+
+public class CropAlreadyExistExceptionTest extends Exception
+{
+
+}

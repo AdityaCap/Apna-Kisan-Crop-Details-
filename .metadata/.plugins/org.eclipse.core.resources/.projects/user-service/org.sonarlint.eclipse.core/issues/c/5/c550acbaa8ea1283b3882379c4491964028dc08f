@@ -1,0 +1,27 @@
+
+ç	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.b ffdf4a6ba4c0adb4f9a6a030ae602296h
+á
+java:S3305"SInject this field value directly into "authenticate", the only method that uses it.b 010ac1b919b408103fdf7e3c0ac41c10h
+É
+java:S3305"OInject this field value directly into "doFilter", the only method that uses it.b 2231e9c2efd7c220440547fae4fd9bd1h
+É
+java:S3305"OInject this field value directly into "doFilter", the only method that uses it.b 019e8ad2bba6df73fa2cddbe522b2612h
+v
+java:S1874"BRemove this use of "EnableGlobalMethodSecurity"; it is deprecated.b fd395e2396c92445bd8055474fe34d6ch
+o	java:S125C"<This block of commented-out lines of code should be removed.b 4517a7ad8f294887bd2aa214649dd391h
+|
+java:S5738F"HRemove this call to a deprecated method, it has been marked for removal.b ca969a1bc97732d97b1e88ce8396c216h
+|
+java:S5738G"HRemove this call to a deprecated method, it has been marked for removal.b f610c6ebe2ce1bdbf76872337521a3eah
+|
+java:S5738I"HRemove this call to a deprecated method, it has been marked for removal.b be5d5d37542d75f93a87094459f76678h
+|
+java:S5738J"HRemove this call to a deprecated method, it has been marked for removal.b 81a9546d3792d29b53b3fc7a0ba4537dh
+|
+java:S5738N"HRemove this call to a deprecated method, it has been marked for removal.b be5d5d37542d75f93a87094459f76678h
+|
+java:S5738O"HRemove this call to a deprecated method, it has been marked for removal.b 0b8996e8484fd77bf121960eed595f0eh
+|
+java:S5738P"HRemove this call to a deprecated method, it has been marked for removal.b be5d5d37542d75f93a87094459f76678h
+ë
+java:S1128"]Remove this unused import 'org.springframework.security.crypto.password.NoOpPasswordEncoder'.b deeb957141154c677b7a311a0e927eb9h

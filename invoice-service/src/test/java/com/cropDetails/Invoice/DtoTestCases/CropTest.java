@@ -1,0 +1,64 @@
+package com.cropDetails.Invoice.DtoTestCases;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
+import org.junit.jupiter.api.Test;
+
+import com.cropDetails.Invoice.Dto.Crop;
+
+public class CropTest {
+
+    @Test
+    public void testConstructorWithArguments() {
+        Crop crop = new Crop(122, 44, "StrawBerries", "Fruits", 499, 100, "Fresh and Juicy , Direct from Farm Strawberries");
+
+        assertEquals(122, crop.getCId());
+        assertEquals(44, crop.getUId());
+        assertEquals("StrawBerries", crop.getName());
+        assertEquals("Fruits", crop.getType());
+        assertEquals(499, crop.getQuantity());
+        assertEquals(100, crop.getCost());
+        assertEquals("Fresh and Juicy , Direct from Farm Strawberries", crop.getDescription());
+    }
+
+    @Test
+    public void testDefaultConstructor() {
+        Crop crop = new Crop();
+
+        assertEquals(0, crop.getCId());
+        assertEquals(0, crop.getUId());
+        assertNull(crop.getName());
+        assertNull(crop.getType());
+        assertEquals(0, crop.getQuantity());
+        assertEquals(0, crop.getCost());
+        assertNull(crop.getDescription());
+    }
+
+    @Test
+    public void testSetterAndGetterMethods() {
+        Crop crop = new Crop();
+
+        crop.setCId(122);
+        crop.setUId(44);
+        crop.setName("StrawBerries");
+        crop.setType("Fruits");
+        crop.setQuantity(499);
+        crop.setCost(100);
+        crop.setDescription("Fresh and Juicy , Direct from Farm Strawberries");
+
+        assertEquals(122, crop.getCId());
+        assertEquals(44, crop.getUId());
+        assertEquals("StrawBerries", crop.getName());
+        assertEquals("Fruits", crop.getType());
+        assertEquals(499, crop.getQuantity());
+        assertEquals(100, crop.getCost());
+        assertEquals("Fresh and Juicy , Direct from Farm Strawberries", crop.getDescription());
+    }
+
+    @Test
+    public void testToStringMethod() {
+        Crop crop = new Crop(122, 44, "StrawBerries", "Fruits", 499, 100, "Fresh and Juicy , Direct from Farm Strawberries");
+        String expectedToString = "Crop(cId=122, uId=44, name=StrawBerries, type=Fruits, quantity=499, cost=100, description=Fresh and Juicy , Direct from Farm Strawberries)";
+        assertEquals(expectedToString, crop.toString());
+    }
+}

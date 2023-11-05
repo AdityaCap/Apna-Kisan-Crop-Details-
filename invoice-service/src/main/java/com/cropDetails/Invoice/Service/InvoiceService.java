@@ -3,8 +3,11 @@ package com.cropDetails.Invoice.Service;
 import java.util.List;
 import java.util.Optional;
 
+import com.cropDetails.Invoice.Exceptions.InSufficentQuantityException;
 import com.cropDetails.Invoice.Exceptions.InvoiceNotFoundException;
 import com.cropDetails.Invoice.Exceptions.InvoiceNotRegisteredException;
+import com.cropDetails.Invoice.Exceptions.NoCropsFoundException;
+import com.cropDetails.Invoice.Exceptions.NotFarmerException;
 import com.cropDetails.Invoice.Model.Invoice;
 
 public interface InvoiceService{
@@ -14,5 +17,7 @@ public interface InvoiceService{
 	boolean cancelInvoice(int invoiceId) throws InvoiceNotFoundException;
 
 	List<Invoice> getAllInvoices()throws InvoiceNotRegisteredException;
+
+	Optional<Invoice> buyCrops(Invoice invoice) throws InSufficentQuantityException,NoCropsFoundException,NotFarmerException;
 
 }

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="CropTest" project="crop-service" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.cropDetails.Testing.CropTest" time="0.59" displayname="CropTest" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropTest]">
+    <testcase name="testValidCrop" classname="com.cropDetails.Testing.CropTest" time="0.59" displayname="testValidCrop()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.CropTest]/[method:testValidCrop()]"/>
+  </testsuite>
+</testrun>

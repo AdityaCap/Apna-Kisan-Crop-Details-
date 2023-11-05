@@ -1,0 +1,5 @@
+
+ç	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.b e030bec04b111fbb1c92070e5116b1f1h
+Ç	java:S116$"ORename this field "Ifsc" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.b 24b3a7e31498765b289086635f271e3ch
+á
+java:S1128"SRemove this unused import 'org.springframework.data.mongodb.core.mapping.Document'.b bf3e0afa6c171a034089d46e76ec9bc5h

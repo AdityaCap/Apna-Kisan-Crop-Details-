@@ -1,0 +1,6 @@
+
+ç	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.b c018735db9ca6fdea76d841c376d54b7h
+Z
+java:S1452("&Remove usage of generic wildcard type.b d1457b72c3fb323a2671125aef3eab5dh
+Ü
+java:S62048"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'b f31c9542f92d797a57d6f9bafca179cdh

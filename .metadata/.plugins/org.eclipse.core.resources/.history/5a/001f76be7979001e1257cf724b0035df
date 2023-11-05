@@ -1,0 +1,21 @@
+package com.cropDetails.Testing;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
+import com.cropDetails.Exceptions.SubscriptionAlreadyExistsException;
+
+public class SubscriptionAlreadyExistsExceptionTest {
+
+    @Test
+    public void testSubscriptionAlreadyExistsException() {
+        // Simulate a situation where the exception should be thrown
+        assertThrows(SubscriptionAlreadyExistsException.class, () -> {
+            throw new SubscriptionAlreadyExistsException();
+        });
+    }
+
+    
+    }
+}

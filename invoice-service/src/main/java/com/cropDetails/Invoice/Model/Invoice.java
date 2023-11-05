@@ -6,35 +6,35 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document(collection="invoice")
+@Document(collection = "invoice")
 public class Invoice {
 	@MongoId
-	private int invoiceId;
-	
+	private String invoiceId;
+
 	@Min(value = 1, message = "Farmer ID must be a positive integer")
-    private int farmerId;
+	private int farmerId;
 
-    @Min(value = 1, message = "Dealer ID must be a positive integer")
-    private int dealerId;
+	@Min(value = 1, message = "Dealer ID must be a positive integer")
+	private int dealerId;
 
-    @Min(value = 1, message = "Crop ID must be a positive integer")
-    private int cropId;
+	@Min(value = 1, message = "Crop ID must be a positive integer")
+	private int cropId;
 
-    @Min(value = 0, message = "Total Cost must be a non-negative integer")
-    private int totalCost;
+	@Min(value = 0, message = "Total Cost must be a non-negative integer")
+	private int totalCost;
 
-    @Min(value = 1, message = "Quantity must be a positive integer")
-    private int quantity;
+	@Min(value = 1, message = "Quantity must be a positive integer")
+	private int quantity;
 
-    //@Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "Date format must be yyyy-MM-dd")
-    //@NotNull(message = "Date of Purchase is required")
-    private Date dateOfPurchase;
+	// @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "Date format must be
+	// yyyy-MM-dd")
+	// @NotNull(message = "Date of Purchase is required")
+	private Date dateOfPurchase;
 }

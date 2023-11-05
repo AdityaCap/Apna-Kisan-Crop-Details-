@@ -8,6 +8,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Crop {
-	private int cropId;
+	private int cId;
 
+	private int uId;
+	
+	private String name;
+
+	private String type;
+
+	private int quantity;
+
+	private int cost;
+
+	private String description;
 }

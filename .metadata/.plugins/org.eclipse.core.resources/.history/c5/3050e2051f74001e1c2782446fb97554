@@ -1,0 +1,156 @@
+package com.cropDetails.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.cropDetails.Clients.UserClient;
+import com.cropDetails.DTO.User;
+import com.cropDetails.Exceptions.CropAlreadyExistException;
+import com.cropDetails.Exceptions.NoCropFoundException;
+import com.cropDetails.Exceptions.NoCropRegisteredException;
+import com.cropDetails.Exceptions.NoSubscriptionFoundException;
+import com.cropDetails.Exceptions.NoUserFoundException;
+import com.cropDetails.Exceptions.NotDealerException;
+import com.cropDetails.Exceptions.SubscriptionAlreadyExistsException;
+import com.cropDetails.Exceptions.UserNotRegisteredException;
+import com.cropDetails.Model.Crop;
+import com.cropDetails.Model.CropSubscription;
+import com.cropDetails.Repository.CropRepository;
+import com.cropDetails.Repository.CropSubscriptionRepository;
+@EnableFeignClients(basePackages = "com.cropDetails.Clients")
+@Service
+public class CropServImpl implements ICropService {
+
+	@Autowired
+	CropRepository repo;
+	@Autowired
+	CropSubscriptionRepository subscriptionRepository;
+	@Autowired
+	UserClient client;
+
+	@Override
+	public List<Crop> viewAllCrops() throws NoCropFoundException {
+		List<Crop> l = repo.findAll();
+		if (l.isEmpty()) {
+			throw new NoCropFoundException();
+		}
+		return l;
+	}
+
+	@Override
+	public Optional<Crop> addCrop(Crop crop) throws CropAlreadyExistException {
+		Optional<Crop> c = repo.findById(crop.getCId());
+		if (c.isPresent()) {
+			throw new CropAlreadyExistException();
+		}
+		return Optional.of(repo.save(crop));
+	}
+
+	@Override
+	public Boolean deleteCropById(int id) throws NoCropRegisteredException {
+		Optional<Crop> c = repo.findById(id);
+		if (c.isEmpty()) {
+			throw new NoCropRegisteredException();
+		}
+		repo.deleteById(id);
+		return true;
+	}
+
+	@Override
+	public Optional<Crop> updateCrop(Crop crop) throws NoCropRegisteredException {
+		Optional<Crop> c = repo.findById(crop.getCId());
+		if (c.isEmpty()) {
+			throw new NoCropRegisteredException();
+		}
+		Crop cr = repo.save(crop);
+		return Optional.of(cr);
+	}
+
+	@Override
+	public Optional<Crop> getCropById(int id) throws NoCropRegisteredException {
+		Optional<Crop> c = repo.findById(id);
+		if (c.isEmpty()) {
+			throw new NoCropRegisteredException();
+		}
+		return c;
+	}
+
+	@Override
+	public Optional<Crop> getCropByName(String name) throws NoCropRegisteredException {
+		Optional<Crop> c = repo.findByName(name);
+		if (c.isEmpty()) {
+			System.out.println(c);
+			throw new NoCropRegisteredException();
+		}
+		return c;
+	}
+
+	@Override
+	public List<Crop> getCropByType(String type) throws NoCropRegisteredException {
+		List<Crop> c = repo.findByType(type);
+		
+
+		if (c.isEmpty()) {
+			
+			throw new NoCropRegisteredException();
+		}
+		return c;
+	}
+
+	public void subscribeToCrop(CropSubscription sub) throws SubscriptionAlreadyExistsException,NotDealerException {
+		// Check if the subscription already exists
+		ResponseEntity<Boolean> s=client.checkIsDealerById(sub.getDealerId());
+		if(s.getBody()) {
+		Optional<CropSubscription> existingSubscription = subscriptionRepository
+				.findByDealerIdAndCropType(sub.getDealerId(), sub.getCropType());
+		if (existingSubscription.isPresent()) {
+			throw new SubscriptionAlreadyExistsException();
+		}
+
+		// Save the subscription to the database
+
+		subscriptionRepository.save(sub);}
+		else {
+			throw new NotDealerException();
+		}
+	}
+
+	@Override
+	public List<CropSubscription> getSubscription() throws NoSubscriptionFoundException {
+		List<CropSubscription> l = subscriptionRepository.findAll();
+		if (l.isEmpty()) {
+			throw new NoSubscriptionFoundException();
+		}
+		return l;
+
+	}
+
+	@Override
+	public Boolean deleteSubscriptionById(int id) throws NoSubscriptionFoundException {
+		Optional<CropSubscription> c = subscriptionRepository.findById(id);
+		if (c.isEmpty()) {
+			throw new NoSubscriptionFoundException();
+		}
+		repo.deleteById(id);
+		return true;
+	}
+
+	@Override
+	public List<Crop> getAllCropsByUserId(int uid) throws NoUserFoundException,UserNotRegisteredException {
+		
+		User u=client.viewUserById(uid).getBody();
+		if(u==null) {
+			throw new UserNotRegisteredException();
+		}
+		List<Crop>l=repo.findByuId(uid);
+		if(l.isEmpty()) {
+			throw new NoCropFoundException();
+		}
+		return l;
+	}
+}

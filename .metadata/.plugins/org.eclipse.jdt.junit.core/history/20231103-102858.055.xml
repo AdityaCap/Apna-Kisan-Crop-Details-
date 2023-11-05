@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="NoCropsFoundExceptionTest" project="invoice-service" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.cropDetails.Invoice.ExceptionsTest.NoCropsFoundExceptionTest" time="0.0" displayname="NoCropsFoundExceptionTest" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.ExceptionsTest.NoCropsFoundExceptionTest]">
+    <testcase name="testNoCropsFoundException" classname="com.cropDetails.Invoice.ExceptionsTest.NoCropsFoundExceptionTest" time="0.0" displayname="testNoCropsFoundException()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.ExceptionsTest.NoCropsFoundExceptionTest]/[method:testNoCropsFoundException()]"/>
+  </testsuite>
+</testrun>

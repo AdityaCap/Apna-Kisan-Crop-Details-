@@ -1,5 +1,6 @@
 package com.cropDetails.Invoice.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,24 +12,27 @@ import com.cropDetails.Invoice.Clients.CropClient;
 import com.cropDetails.Invoice.Clients.UserClient;
 import com.cropDetails.Invoice.Dto.Crop;
 import com.cropDetails.Invoice.Dto.User;
+import com.cropDetails.Invoice.Exceptions.InSufficentQuantityException;
 import com.cropDetails.Invoice.Exceptions.InvoiceNotFoundException;
 import com.cropDetails.Invoice.Exceptions.InvoiceNotRegisteredException;
+import com.cropDetails.Invoice.Exceptions.NoCropsFoundException;
+import com.cropDetails.Invoice.Exceptions.NotFarmerException;
 import com.cropDetails.Invoice.Model.Invoice;
 import com.cropDetails.Invoice.Repository.InvoiceRepository;
 
 @Service
-@EnableFeignClients(basePackages="com.cropDetails.Invoice.Clients")
+@EnableFeignClients(basePackages = "com.cropDetails.Invoice.Clients")
 
 public class InvoiceServiceImpl implements InvoiceService {
 
 	@Autowired
 	InvoiceRepository repo;
-	
+
 	@Autowired
 	UserClient user;
-	
+
 	@Autowired
-	CropClient crop;
+	CropClient cropclient;
 
 	@Override
 	public Optional<Invoice> generateInvoice(Invoice invoice) {
@@ -36,12 +40,13 @@ public class InvoiceServiceImpl implements InvoiceService {
 		System.out.println(farmer);
 		User dealer = user.viewUserById(invoice.getDealerId());
 		System.out.println(dealer);
-		
-		Crop cr = crop.getCropById(invoice.getCropId());
+
+		Crop cr = cropclient.getCropById(invoice.getCropId());
 		System.out.println(cr);
-		
-		//Invoice generatedInvoice = new Invoice(invoice.getInvoiceId(), farmer.getUId(), dealer.getUId(), cr.getCropId(),
-			//	invoice.getQuantity(), invoice.getTotalCost(), invoice.getDateOfPurhase());
+
+		// Invoice generatedInvoice = new Invoice(invoice.getInvoiceId(),
+		// farmer.getUId(), dealer.getUId(), cr.getCropId(),
+		// invoice.getQuantity(), invoice.getTotalCost(), invoice.getDateOfPurhase());
 
 		repo.save(invoice);
 		return Optional.of(invoice);
@@ -67,4 +72,49 @@ public class InvoiceServiceImpl implements InvoiceService {
 		return l;
 	}
 
+	@Override
+	public Optional<Invoice> buyCrops(Invoice invoice) throws InSufficentQuantityException,NoCropsFoundException ,NotFarmerException{
+		Crop crop = cropclient.getCropById(invoice.getCropId());
+		if(crop.getUId()!=invoice.getFarmerId()) {
+			throw new NotFarmerException();
+		}
+		if(crop==null) {
+			throw new NoCropsFoundException();
+		}
+
+		// api check farmer based on the crop id
+		// ResponseEntity<Boolean> dealer =
+		// user.checkIsDealerById(invoice.getDealerId());
+
+//        if (crop == null || dealer == null) {
+//            // Handle invalid crop or dealer
+//            return null;
+//        }
+
+		if (crop.getQuantity() < invoice.getQuantity()) {
+			// Handle insufficient quantity of crops
+			throw new InSufficentQuantityException();
+		}
+
+		// Calculate the total cost
+		int totalCost = crop.getCost() * invoice.getQuantity();
+		System.out.println(totalCost);
+		// Update crop quantity
+		// call theupdate crop api
+		crop.setQuantity(crop.getQuantity() - invoice.getQuantity());
+		// cropRepository.save(crop);
+
+		// Create an invoice
+		Invoice newInvoice = new Invoice();
+		newInvoice.setCropId(invoice.getCropId());
+		newInvoice.setDealerId(invoice.getDealerId());
+		newInvoice.setTotalCost(totalCost);
+		newInvoice.setQuantity(invoice.getQuantity());
+		newInvoice.setDateOfPurchase(new Date());
+
+		// Save the invoice
+		Invoice gg = repo.save(newInvoice);
+
+		return Optional.of(gg);
+	}
 }

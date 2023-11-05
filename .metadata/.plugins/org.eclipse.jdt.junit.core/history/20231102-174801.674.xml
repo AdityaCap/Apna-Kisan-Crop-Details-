@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ResourceNotFoundExceptionTest" project="crop-service" tests="3" started="3" failures="0" errors="0" ignored="0">
+  <testsuite name="com.cropDetails.Testing.ResourceNotFoundExceptionTest" time="0.023" displayname="ResourceNotFoundExceptionTest" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.ResourceNotFoundExceptionTest]">
+    <testcase name="testResourceNotFoundExceptionWithMessage" classname="com.cropDetails.Testing.ResourceNotFoundExceptionTest" time="0.018" displayname="testResourceNotFoundExceptionWithMessage()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.ResourceNotFoundExceptionTest]/[method:testResourceNotFoundExceptionWithMessage()]"/>
+    <testcase name="testResourceNotFoundException" classname="com.cropDetails.Testing.ResourceNotFoundExceptionTest" time="0.001" displayname="testResourceNotFoundException()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.ResourceNotFoundExceptionTest]/[method:testResourceNotFoundException()]"/>
+    <testcase name="testResourceNotFoundExceptionMessage" classname="com.cropDetails.Testing.ResourceNotFoundExceptionTest" time="0.003" displayname="testResourceNotFoundExceptionMessage()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.ResourceNotFoundExceptionTest]/[method:testResourceNotFoundExceptionMessage()]"/>
+  </testsuite>
+</testrun>

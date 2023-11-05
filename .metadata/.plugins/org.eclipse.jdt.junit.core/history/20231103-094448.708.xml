@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="InvoiceControllerTest" project="invoice-service" tests="5" started="5" failures="0" errors="0" ignored="0">
+  <testsuite name="com.cropDetails.Invoice.TestCases.InvoiceControllerTest" time="2.053" displayname="InvoiceControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.TestCases.InvoiceControllerTest]">
+    <testcase name="testGenerateInvoice" classname="com.cropDetails.Invoice.TestCases.InvoiceControllerTest" time="2.039" displayname="testGenerateInvoice()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.TestCases.InvoiceControllerTest]/[method:testGenerateInvoice()]"/>
+    <testcase name="testGetAllInvoices" classname="com.cropDetails.Invoice.TestCases.InvoiceControllerTest" time="0.002" displayname="testGetAllInvoices()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.TestCases.InvoiceControllerTest]/[method:testGetAllInvoices()]"/>
+    <testcase name="testGenerateInvoiceFailed" classname="com.cropDetails.Invoice.TestCases.InvoiceControllerTest" time="0.001" displayname="testGenerateInvoiceFailed()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.TestCases.InvoiceControllerTest]/[method:testGenerateInvoiceFailed()]"/>
+    <testcase name="testBuyCrops" classname="com.cropDetails.Invoice.TestCases.InvoiceControllerTest" time="0.003" displayname="testBuyCrops()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.TestCases.InvoiceControllerTest]/[method:testBuyCrops()]"/>
+    <testcase name="testCancelInvoice" classname="com.cropDetails.Invoice.TestCases.InvoiceControllerTest" time="0.003" displayname="testCancelInvoice()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.TestCases.InvoiceControllerTest]/[method:testCancelInvoice()]"/>
+  </testsuite>
+</testrun>

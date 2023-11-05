@@ -1,9 +1,0 @@
-package com.cropDetails.Repository;
-
-import org.springframework.data.mongodb.repository.MongoRepository;
-
-import com.cropDetails.Model.User;
-
-public interface FarmerRepo extends MongoRepository<User, Integer> {
-
-}

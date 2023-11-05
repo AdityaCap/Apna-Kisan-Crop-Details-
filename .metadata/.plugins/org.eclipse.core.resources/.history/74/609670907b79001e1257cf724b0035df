@@ -1,0 +1,72 @@
+package com.cropDetails.Testing;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpStatus;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import com.cropDetails.ExceptionHandler.CropExceptionHandler;
+
+public class CropExceptionHandlerTest {
+
+    private final CropExceptionHandler cropExceptionHandler = new CropExceptionHandler();
+    private final MockMvc mockMvc = MockMvcBuilders.standaloneSetup(cropExceptionHandler).build();
+
+    @Test
+    public void testHandleCropNotRegisteredException() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/handleCropNotRegisteredException"))
+               .andExpect(MockMvcResultMatchers.status().is(HttpStatus.NOT_FOUND.value()))
+               .andExpect(MockMvcResultMatchers.content().string("Crop is not registered with us"));
+    }
+
+    @Test
+    public void testHandleCropAlreadyFoundException() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/handleCropAlreadyFoundException"))
+               .andExpect(MockMvcResultMatchers.status().is(HttpStatus.NOT_FOUND.value()))
+               .andExpect(MockMvcResultMatchers.content().string("This Crop already exists with us"));
+    }
+
+    @Test
+    public void testHandleNoCropFoundException() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/handleNoCropFoundException"))
+               .andExpect(MockMvcResultMatchers.status().is(HttpStatus.NOT_FOUND.value()))
+               .andExpect(MockMvcResultMatchers.content().string("There are no Crops registered .Please first add one"));
+    }
+
+    @Test
+    public void testHandleSubscriptionAlreadyExistsException() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/handleSubscriptionAlreadyExistsException"))
+               .andExpect(MockMvcResultMatchers.status().is(HttpStatus.NOT_FOUND.value()))
+               .andExpect(MockMvcResultMatchers.content().string("Subscription already exists for this user and crop type."));
+    }
+
+    @Test
+    public void testHandleNoSubscriptionFoundException() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/handleNoSubscriptionFoundException"))
+               .andExpect(MockMvcResultMatchers.status().is(HttpStatus.NOT_FOUND.value()))
+               .andExpect(MockMvcResultMatchers.content().string("No subscriptions found."));
+    }
+
+    @Test
+    public void testNotDealerException() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/notDealerException"))
+               .andExpect(MockMvcResultMatchers.status().is(HttpStatus.NOT_FOUND.value()))
+               .andExpect(MockMvcResultMatchers.content().string("User is found but not a dealer."));
+    }
+
+    @Test
+    public void testNoUserFoundException() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/noUserFoundException"))
+               .andExpect(MockMvcResultMatchers.status().is(HttpStatus.NOT_FOUND.value()))
+               .andExpect(MockMvcResultMatchers.content().string("No User Found."));
+    }
+
+    @Test
+    public void testUserNotRegisteredException() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/userNotRegisteredException"))
+               .andExpect(MockMvcResultMatchers.status().is(HttpStatus.NOT_FOUND.value()))
+               .andExpect(MockMvcResultMatchers.content().string("No User is registered with us"));
+    }
+}

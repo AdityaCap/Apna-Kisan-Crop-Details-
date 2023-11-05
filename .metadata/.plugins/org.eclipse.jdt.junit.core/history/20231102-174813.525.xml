@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="UserNotRegisteredExceptionTest" project="crop-service" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.cropDetails.Testing.UserNotRegisteredExceptionTest" time="0.014" displayname="UserNotRegisteredExceptionTest" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.UserNotRegisteredExceptionTest]">
+    <testcase name="testUserNotRegisteredException" classname="com.cropDetails.Testing.UserNotRegisteredExceptionTest" time="0.014" displayname="testUserNotRegisteredException()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Testing.UserNotRegisteredExceptionTest]/[method:testUserNotRegisteredException()]"/>
+  </testsuite>
+</testrun>

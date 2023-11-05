@@ -1,0 +1,65 @@
+package com.cropDetails.Invoice.CustomErrorTestCases;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
+import java.nio.charset.Charset;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.mock.http.client.MockClientHttpResponse;
+import org.springframework.util.StreamUtils;
+
+import com.cropDetails.Invoice.ErrorDecoder.CustomErrorDecoder;
+import com.cropDetails.Invoice.Exceptions.ResourceNotFoundException;
+
+import feign.FeignException;
+import feign.Response;
+
+public class CustomErrorDecoderTest {
+
+    private CustomErrorDecoder customErrorDecoder;
+
+    @Mock
+    private Response response;
+
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+        customErrorDecoder = new CustomErrorDecoder();
+    }
+
+    @Test
+    public void testDecodeWithResourceNotFoundException() {
+        // Simulate a 404 response with a custom error message
+        when(response.status()).thenReturn(404);
+        when(response.body()).thenReturn(null);
+
+        Exception exception = customErrorDecoder.decode("methodKey", response);
+
+        // Verify that a ResourceNotFoundException is thrown with the correct message
+        assertEquals(ResourceNotFoundException.class, exception.getClass());
+        assertEquals("Resource not found", exception.getMessage());
+    }
+
+    @Test
+    public void testDecodeWithOtherStatus() {
+        // Simulate a response with a different status code (e.g., 500)
+        when(response.status()).thenReturn(500);
+
+        // Verify that a custom FeignException is returned
+        Exception exception = customErrorDecoder.decode("methodKey", response);
+        assertEquals(FeignException.class, exception.getClass());
+    }
+
+
+    private ClientHttpResponse createMockResponse(String responseBody) {
+        byte[] bodyBytes = responseBody.getBytes(Charset.defaultCharset());
+        return new MockClientHttpResponse(bodyBytes, HttpStatus.OK);
+    }
+}
+

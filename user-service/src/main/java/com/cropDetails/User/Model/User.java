@@ -43,8 +43,8 @@ public class User {
 	@Size(max = 255, message = "Address should not exceed 255 characters")
 	private String address;
 
-	@NotBlank(message = "Role is required")
-	@Size(max = 255, message = "Role should not exceed 255 characters")
+	@NotBlank(message = "Role is required,Please choose ROLE_ADMIN / ROLE_FARMER / ROLE_DEALER")
+	@Size(max = 255, message = "Role should not exceed 255 characters,Please choose ROLE_ADMIN / ROLE_FARMER/ROLE_DEALER")
 	private String role;
 
 	@NotBlank(message = "Email is required")
@@ -54,6 +54,7 @@ public class User {
 
 	@NotBlank(message = "Password is required")
 	private String password;
+	
 
 
 	private BankDetails bankDetails;

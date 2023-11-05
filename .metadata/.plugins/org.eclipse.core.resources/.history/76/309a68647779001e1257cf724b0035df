@@ -1,0 +1,49 @@
+package com.cropDetails.Testing;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
+import com.cropDetails.Model.Crop;
+
+public class CropTest {
+
+    @Test
+    public void testValidCrop() {
+        Crop crop = new Crop();
+        crop.setCId(1);
+        crop.setUId(1);
+        crop.setName("Valid Crop");
+        crop.setType("Fruits");
+        crop.setQuantity(10);
+        crop.setCost(50);
+        crop.setDescription("Valid description");
+        
+        assertDoesNotThrow(() -> {
+            // Perform validation
+            // You can use a validation framework like Hibernate Validator
+            // to validate the fields here
+        });
+    }
+
+    @Test
+    public void testInvalidCrop() {
+        Crop crop = new Crop();
+
+        // Set invalid values for the crop fields
+        crop.setCId(0); // Invalid cId
+        crop.setUId(0); // Invalid uId
+        crop.setName("I"); // Invalid name (less than 2 characters)
+        crop.setType("InvalidType"); // Invalid type
+        crop.setQuantity(-1); // Invalid quantity (negative)
+        crop.setCost(-10); // Invalid cost (negative)
+        crop.setDescription(""); // Invalid description (empty)
+
+        assertThrows(Exception.class, () -> {
+            // Perform validation
+            // You can use a validation framework like Hibernate Validator
+            // to validate the fields here
+        });
+    }
+}

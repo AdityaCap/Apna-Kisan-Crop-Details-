@@ -1,5 +1,0 @@
-package com.cropDetails.Invoice.ErrorDecoder;
-
-public class CustomErrorDecoder {
-
-}

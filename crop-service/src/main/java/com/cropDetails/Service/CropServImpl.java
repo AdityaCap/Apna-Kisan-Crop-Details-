@@ -9,17 +9,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.cropDetails.Clients.UserClient;
+import com.cropDetails.DTO.User;
 import com.cropDetails.Exceptions.CropAlreadyExistException;
 import com.cropDetails.Exceptions.NoCropFoundException;
 import com.cropDetails.Exceptions.NoCropRegisteredException;
 import com.cropDetails.Exceptions.NoSubscriptionFoundException;
-import com.cropDetails.Exceptions.NoUserFoundException;
 import com.cropDetails.Exceptions.NotDealerException;
 import com.cropDetails.Exceptions.SubscriptionAlreadyExistsException;
+import com.cropDetails.Exceptions.UserNotRegisteredException;
 import com.cropDetails.Model.Crop;
 import com.cropDetails.Model.CropSubscription;
 import com.cropDetails.Repository.CropRepository;
 import com.cropDetails.Repository.CropSubscriptionRepository;
+
 @EnableFeignClients(basePackages = "com.cropDetails.Clients")
 @Service
 public class CropServImpl implements ICropService {
@@ -43,7 +45,12 @@ public class CropServImpl implements ICropService {
 	@Override
 	public Optional<Crop> addCrop(Crop crop) throws CropAlreadyExistException {
 		Optional<Crop> c = repo.findById(crop.getCId());
+		Optional<Crop> cr=repo.findByName(crop.getName());
+		
 		if (c.isPresent()) {
+			throw new CropAlreadyExistException();
+		}
+		if(cr.isPresent()) {
 			throw new CropAlreadyExistException();
 		}
 		return Optional.of(repo.save(crop));
@@ -91,29 +98,28 @@ public class CropServImpl implements ICropService {
 	@Override
 	public List<Crop> getCropByType(String type) throws NoCropRegisteredException {
 		List<Crop> c = repo.findByType(type);
-		
 
 		if (c.isEmpty()) {
-			
+
 			throw new NoCropRegisteredException();
 		}
 		return c;
 	}
 
-	public void subscribeToCrop(CropSubscription sub) throws SubscriptionAlreadyExistsException,NotDealerException {
+	public void subscribeToCrop(CropSubscription sub) throws SubscriptionAlreadyExistsException, NotDealerException {
 		// Check if the subscription already exists
-		ResponseEntity<Boolean> s=client.checkIsDealerById(sub.getDealerId());
-		if(s.getBody()) {
-		Optional<CropSubscription> existingSubscription = subscriptionRepository
-				.findByDealerIdAndCropType(sub.getDealerId(), sub.getCropType());
-		if (existingSubscription.isPresent()) {
-			throw new SubscriptionAlreadyExistsException();
-		}
+		ResponseEntity<Boolean> s = client.checkIsDealerById(sub.getDealerId());
+		if (s.getBody()) {
+			Optional<CropSubscription> existingSubscription = subscriptionRepository
+					.findByDealerIdAndCropType(sub.getDealerId(), sub.getCropType());
+			if (existingSubscription.isPresent()) {
+				throw new SubscriptionAlreadyExistsException();
+			}
 
-		// Save the subscription to the database
+			// Save the subscription to the database
 
-		subscriptionRepository.save(sub);}
-		else {
+			subscriptionRepository.save(sub);
+		} else {
 			throw new NotDealerException();
 		}
 	}
@@ -139,10 +145,15 @@ public class CropServImpl implements ICropService {
 	}
 
 	@Override
-	public List<Crop> getAllCropsByUserId(int uid) throws NoUserFoundException {
-		List<Crop>l=repo.findByuId(uid);
-		if(l.isEmpty()) {
-			throw new NoUserFoundException();
+	public List<Crop> getAllCropsByUserId(int uid) throws NoCropFoundException, UserNotRegisteredException {
+
+		User u = client.viewUserById(uid).getBody();
+		if (u == null) {
+			throw new UserNotRegisteredException();
+		}
+		List<Crop> l = repo.findByuId(uid);
+		if (l.isEmpty()) {
+			throw new NoCropFoundException();
 		}
 		return l;
 	}

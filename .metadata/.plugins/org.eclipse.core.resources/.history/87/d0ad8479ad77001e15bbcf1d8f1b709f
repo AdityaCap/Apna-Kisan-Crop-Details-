@@ -1,0 +1,232 @@
+package com.cropDetails.Testing;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.OK;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.ResponseEntity;
+
+import com.cropDetails.Clients.UserClient;
+import com.cropDetails.DTO.User;
+import com.cropDetails.Exceptions.CropAlreadyExistException;
+import com.cropDetails.Exceptions.NoCropFoundException;
+import com.cropDetails.Exceptions.NoCropRegisteredException;
+import com.cropDetails.Exceptions.NoSubscriptionFoundException;
+import com.cropDetails.Exceptions.NotDealerException;
+import com.cropDetails.Exceptions.SubscriptionAlreadyExistsException;
+import com.cropDetails.Exceptions.UserNotRegisteredException;
+import com.cropDetails.Model.Crop;
+import com.cropDetails.Model.CropSubscription;
+import com.cropDetails.Repository.CropRepository;
+import com.cropDetails.Repository.CropSubscriptionRepository;
+import com.cropDetails.Service.CropServImpl;
+
+public class CropServImplTest {
+
+    @InjectMocks
+    private CropServImpl cropService;
+
+    @Mock
+    private CropRepository cropRepository;
+
+    @Mock
+    private CropSubscriptionRepository subscriptionRepository;
+
+    @Mock
+    private UserClient userClient;
+
+    @BeforeEach
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
+
+    @Test
+    public void testViewAllCrops() throws NoCropFoundException {
+        List<Crop> crops = new ArrayList<>();
+        when(cropRepository.findAll()).thenReturn(crops);
+
+        List<Crop> result = cropService.viewAllCrops();
+
+        verify(cropRepository).findAll();
+        assertEquals(crops, result);
+    }
+
+    @Test
+    public void testAddCrop() throws CropAlreadyExistException {
+        Crop crop = new Crop();
+        when(cropRepository.findById(crop.getCId())).thenReturn(Optional.empty());
+        when(cropRepository.save(crop)).thenReturn(crop);
+
+        Optional<Crop> result = cropService.addCrop(crop);
+
+        verify(cropRepository).findById(crop.getCId());
+        verify(cropRepository).save(crop);
+        assertEquals(crop, result.get());
+    }
+
+    @Test
+    public void testDeleteCropById() throws NoCropRegisteredException {
+        int id = 1;
+        when(cropRepository.findById(id)).thenReturn(Optional.of(new Crop()));
+
+        boolean result = cropService.deleteCropById(id);
+
+        verify(cropRepository).findById(id);
+        verify(cropRepository).deleteById(id);
+        assertTrue(result);
+    }
+
+    @Test
+    public void testUpdateCrop() throws NoCropRegisteredException {
+        Crop crop = new Crop();
+        when(cropRepository.findById(crop.getCId())).thenReturn(Optional.of(crop));
+        when(cropRepository.save(crop)).thenReturn(crop);
+
+        Optional<Crop> result = cropService.updateCrop(crop);
+
+        verify(cropRepository).findById(crop.getCId());
+        verify(cropRepository).save(crop);
+        assertEquals(crop, result.get());
+    }
+
+    @Test
+    public void testGetCropById() throws NoCropRegisteredException {
+        int id = 1;
+        Crop crop = new Crop();
+        when(cropRepository.findById(id)).thenReturn(Optional.of(crop));
+
+        Optional<Crop> result = cropService.getCropById(id);
+
+        verify(cropRepository).findById(id);
+        assertEquals(crop, result.get());
+    }
+
+    @Test
+    public void testGetCropByName() throws NoCropRegisteredException {
+        String name = "TestCrop";
+        Crop crop = new Crop();
+        when(cropRepository.findByName(name)).thenReturn(Optional.of(crop));
+
+        Optional<Crop> result = cropService.getCropByName(name);
+
+        verify(cropRepository).findByName(name);
+        assertEquals(crop, result.get());
+    }
+
+    @Test
+    public void testGetCropByType() throws NoCropRegisteredException {
+        String type = "TestType";
+        List<Crop> crops = new ArrayList<>();
+        when(cropRepository.findByType(type)).thenReturn(crops);
+
+        List<Crop> result = cropService.getCropByType(type);
+
+        verify(cropRepository).findByType(type);
+        assertEquals(crops, result);
+    }
+
+    @Test
+    public void testSubscribeToCrop() throws SubscriptionAlreadyExistsException, NotDealerException {
+        CropSubscription subscription = new CropSubscription();
+        when(userClient.checkIsDealerById(subscription.getDealerId())).thenReturn(ResponseEntity.status(OK).body(true));
+        when(subscriptionRepository.findByDealerIdAndCropType(subscription.getDealerId(), subscription.getCropType()))
+            .thenReturn(Optional.empty());
+
+        assertDoesNotThrow(() -> cropService.subscribeToCrop(subscription));
+
+        verify(userClient).checkIsDealerById(subscription.getDealerId());
+        verify(subscriptionRepository).findByDealerIdAndCropType(subscription.getDealerId(), subscription.getCropType());
+        verify(subscriptionRepository).save(subscription);
+    }
+
+    @Test
+    public void testSubscribeToCrop_SubscriptionAlreadyExists() {
+        CropSubscription subscription = new CropSubscription();
+        when(userClient.checkIsDealerById(subscription.getDealerId())).thenReturn(ResponseEntity.status(OK).body(true));
+        when(subscriptionRepository.findByDealerIdAndCropType(subscription.getDealerId(), subscription.getCropType()))
+            .thenReturn(Optional.of(subscription));
+
+        assertThrows(SubscriptionAlreadyExistsException.class, () -> cropService.subscribeToCrop(subscription));
+
+        verify(userClient).checkIsDealerById(subscription.getDealerId());
+        verify(subscriptionRepository).findByDealerIdAndCropType(subscription.getDealerId(), subscription.getCropType());
+        verify(subscriptionRepository, never()).save(subscription);
+    }
+
+    @Test
+    public void testSubscribeToCrop_NotDealerException() {
+        CropSubscription subscription = new CropSubscription();
+        when(userClient.checkIsDealerById(subscription.getDealerId())).thenReturn(ResponseEntity.status(NOT_FOUND).build());
+
+        assertThrows(NotDealerException.class, () -> cropService.subscribeToCrop(subscription));
+
+        verify(userClient).checkIsDealerById(subscription.getDealerId());
+        verify(subscriptionRepository, never()).findByDealerIdAndCropType(any(), any());
+        verify(subscriptionRepository, never()).save(subscription);
+    }
+
+    @Test
+    public void testGetSubscription() throws NoSubscriptionFoundException {
+        List<CropSubscription> subscriptions = new ArrayList<>();
+        when(subscriptionRepository.findAll()).thenReturn(subscriptions);
+
+        List<CropSubscription> result = cropService.getSubscription();
+
+        verify(subscriptionRepository).findAll();
+        assertEquals(subscriptions, result);
+    }
+
+    @Test
+    public void testDeleteSubscriptionById() throws NoSubscriptionFoundException {
+        int id = 1;
+        when(subscriptionRepository.findById(id)).thenReturn(Optional.of(new CropSubscription()));
+
+        boolean result = cropService.deleteSubscriptionById(id);
+
+        verify(subscriptionRepository).findById(id);
+        verify(subscriptionRepository).deleteById(id);
+        assertTrue(result);
+    }
+
+    @Test
+    public void testGetAllCropsByUserId() throws NoCropFoundException, UserNotRegisteredException {
+        int userId = 1;
+        User user = new User();
+        List<Crop> crops = new ArrayList<>();
+        when(userClient.viewUserById(userId)).thenReturn(ResponseEntity.status(OK).body(user));
+        when(cropRepository.findByuId(userId)).thenReturn(crops);
+
+        List<Crop> result = cropService.getAllCropsByUserId(userId);
+
+        verify(userClient).viewUserById(userId);
+        verify(cropRepository).findByuId(userId);
+        assertEquals(crops, result);
+    }
+
+    @Test
+    public void testGetAllCropsByUserId_UserNotRegisteredException() throws UserNotRegisteredException {
+        int userId = 1;
+        when(userClient.viewUserById(userId)).thenReturn(ResponseEntity.status(NOT_FOUND).build());
+
+        assertThrows(UserNotRegisteredException.class, () -> cropService.getAllCropsByUserId(userId));
+
+        verify(userClient).viewUserById(userId);
+        verify(cropRepository, never()).findByuId(any());
+    }
+}

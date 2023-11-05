@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,21 +25,27 @@ public interface CropClient {
 	@GetMapping("getAll")
 	public List<Crop> viewAllCrops();
 
+	@PreAuthorize("hasAnyRole('FARMER')")
 	@PostMapping("/registerCrop")
 	public ResponseEntity<Crop> addCrop(@Valid @RequestBody Crop crop);
 
+	@PreAuthorize("hasAnyRole('FARMER')")
 	@DeleteMapping("/deleteById/{id}")
 	public ResponseEntity<Boolean> deleteCropById(@PathVariable int id);
 
+	@PreAuthorize("hasAnyRole('DEALER','ADMIN','FARMER')")
 	@PutMapping("/update")
 	public ResponseEntity<Crop> updateCrop(@Valid @RequestBody Crop crop);
 
+	@PreAuthorize("hasAnyRole('DEALER','ADMIN','FARMER')")
 	@GetMapping("/getById/{id}")
 	public ResponseEntity<Crop> getCropById(@PathVariable int id);
 
+	@PreAuthorize("hasAnyRole('DEALER','ADMIN','FARMER')")
 	@GetMapping("/getByName/{name}")
 	public ResponseEntity<Crop> getCropByName(@PathVariable String name);
 
+	@PreAuthorize("hasAnyRole('DEALER','ADMIN','FARMER')")
 	@GetMapping("/getByType/{type}")
 	public ResponseEntity<List<Crop>> getCropByType(@PathVariable String type);
 
@@ -51,8 +58,10 @@ public interface CropClient {
 	@DeleteMapping("deleteSubscriptionById/{id}")
 	public ResponseEntity<Boolean> deleteSubscriptionById(@PathVariable int id);
 	
+	@PreAuthorize("hasAnyRole('DEALER','ADMIN','FARMER')")
 	@GetMapping("/getAllCropsByUserId/{uid}")
 	public ResponseEntity<List<Crop>>getAllCropsByUserId(@PathVariable int uid);
 		
+	
 	
 }

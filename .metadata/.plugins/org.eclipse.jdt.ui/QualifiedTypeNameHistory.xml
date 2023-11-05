@@ -10,7 +10,6 @@
     <fullyQualifiedTypeName name="com.cropDetails.Invoice.Service.InvoiceService"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
-    <fullyQualifiedTypeName name="java.util.Optional"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
     <fullyQualifiedTypeName name="com.cropDetails.Invoice.Repository.InvoiceRepository"/>
     <fullyQualifiedTypeName name="com.cropDetails.Invoice.Dto.User"/>
@@ -30,4 +29,8 @@
     <fullyQualifiedTypeName name="com.cropDetails.Invoice.Exceptions.InvoiceNotFoundException"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ExceptionHandler"/>
     <fullyQualifiedTypeName name="com.cropDetails.Invoice.Exceptions.InvoiceNotRegisteredException"/>
+    <fullyQualifiedTypeName name="com.cropDetails.DTO.User"/>
+    <fullyQualifiedTypeName name="java.util.Optional"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.cropDetails.Exceptions.CropAlreadyExistException"/>
 </qualifiedTypeNameHistroy>

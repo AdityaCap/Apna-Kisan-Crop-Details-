@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="InvoiceTest" project="invoice-service" tests="7" started="7" failures="0" errors="0" ignored="0">
+  <testsuite name="com.cropDetails.Invoice.ModelTestCases.InvoiceTest" time="0.065" displayname="InvoiceTest" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.ModelTestCases.InvoiceTest]">
+    <testcase name="testInvoiceId" classname="com.cropDetails.Invoice.ModelTestCases.InvoiceTest" time="0.048" displayname="testInvoiceId()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.ModelTestCases.InvoiceTest]/[method:testInvoiceId()]"/>
+    <testcase name="testQuantity" classname="com.cropDetails.Invoice.ModelTestCases.InvoiceTest" time="0.0" displayname="testQuantity()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.ModelTestCases.InvoiceTest]/[method:testQuantity()]"/>
+    <testcase name="testTotalCost" classname="com.cropDetails.Invoice.ModelTestCases.InvoiceTest" time="0.0" displayname="testTotalCost()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.ModelTestCases.InvoiceTest]/[method:testTotalCost()]"/>
+    <testcase name="testDealerId" classname="com.cropDetails.Invoice.ModelTestCases.InvoiceTest" time="0.0" displayname="testDealerId()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.ModelTestCases.InvoiceTest]/[method:testDealerId()]"/>
+    <testcase name="testCropId" classname="com.cropDetails.Invoice.ModelTestCases.InvoiceTest" time="0.0" displayname="testCropId()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.ModelTestCases.InvoiceTest]/[method:testCropId()]"/>
+    <testcase name="testFarmerId" classname="com.cropDetails.Invoice.ModelTestCases.InvoiceTest" time="0.001" displayname="testFarmerId()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.ModelTestCases.InvoiceTest]/[method:testFarmerId()]"/>
+    <testcase name="testDateOfPurchase" classname="com.cropDetails.Invoice.ModelTestCases.InvoiceTest" time="0.012" displayname="testDateOfPurchase()" uniqueid="[engine:junit-jupiter]/[class:com.cropDetails.Invoice.ModelTestCases.InvoiceTest]/[method:testDateOfPurchase()]"/>
+  </testsuite>
+</testrun>

@@ -1,0 +1,4 @@
+
+ç	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.b 49a232a7c04e1d39646c432c8029cacdh
+[
+java:S1068"'Remove this unused "uId" private field.b 526df808701f5cc4c8b3f317fc7ed488h

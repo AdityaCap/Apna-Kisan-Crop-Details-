@@ -1,0 +1,26 @@
+
+ç
+java:S22930"YReplace the type specification in this constructor call with the diamond operator ("<>").b c2f31f68e0403238248890a16bceb6f8h
+ç
+java:S22938"YReplace the type specification in this constructor call with the diamond operator ("<>").b 9ee8d09ef58373cd95feda08fe0c1a4dh
+ç
+java:S2293@"YReplace the type specification in this constructor call with the diamond operator ("<>").b c2f31f68e0403238248890a16bceb6f8h
+ç
+java:S2293H"YReplace the type specification in this constructor call with the diamond operator ("<>").b c2f31f68e0403238248890a16bceb6f8h
+ç
+java:S2293O"YReplace the type specification in this constructor call with the diamond operator ("<>").b c2f31f68e0403238248890a16bceb6f8h
+ç
+java:S2293W"YReplace the type specification in this constructor call with the diamond operator ("<>").b 4e07b5dbd4e03f1b7b73518651ca658eh
+ç
+java:S2293_"YReplace the type specification in this constructor call with the diamond operator ("<>").b a4f5c9920c2235bcf03341de5d2e2d58h
+ç
+java:S2293g"YReplace the type specification in this constructor call with the diamond operator ("<>").b 34c79075745c9e74782d04eb8a74c80dh
+ç
+java:S2293p"YReplace the type specification in this constructor call with the diamond operator ("<>").b 9ee8d09ef58373cd95feda08fe0c1a4dh
+ç
+java:S2293v"YReplace the type specification in this constructor call with the diamond operator ("<>").b 4e07b5dbd4e03f1b7b73518651ca658eh
+à
+java:S1192G"TDefine a constant instead of duplicating this literal "getting crop by id " 3 times.b 0292e050f12f41fc0ec4d1a3945d66dch
+ç	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.b c018735db9ca6fdea76d841c376d54b7h
+¬
+java:S1130u"çRemove the declaration of thrown exception 'com.cropDetails.User.Exceptions.NoUserFoundException', as it cannot be thrown from method's body.b c4ca7d2718655e5615bdce356ade526dh

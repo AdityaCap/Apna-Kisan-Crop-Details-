@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -61,7 +62,7 @@ public class InvoiceClientController {
 
 	@PreAuthorize("hasAnyRole('ADMIN','DEALER')")
 	@DeleteMapping("/cancel/{invoiceId}")
-	public boolean cancelInvoice(@PathVariable int invoiceId) throws InvoiceNotFoundException {
+	public boolean cancelInvoice(@PathVariable String invoiceId) throws InvoiceNotFoundException {
 		log.info("Deleting invoice with id " + invoiceId);
 		Optional<Invoice> i = irepo.findById(invoiceId);
 		if (i.isEmpty()) {
@@ -75,12 +76,11 @@ public class InvoiceClientController {
 	@PreAuthorize("hasAnyRole('ADMIN','DEALER')")
 	public ResponseEntity<List<Invoice>> getAllInvoices() throws InvoiceNotRegisteredException {
 		log.info("Showing all the list of invoices");
-		
 		List<Invoice> l = irepo.findAll();
 		if (l.isEmpty()) {
 			throw new InvoiceNotRegisteredException();
 		}
-		
+
 		return new ResponseEntity<List<Invoice>>(l, HttpStatus.OK);
 	}
 

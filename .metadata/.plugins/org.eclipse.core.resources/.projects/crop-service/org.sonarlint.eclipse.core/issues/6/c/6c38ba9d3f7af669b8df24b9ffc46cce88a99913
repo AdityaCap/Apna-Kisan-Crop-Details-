@@ -1,0 +1,38 @@
+
+ç
+java:S2293*"YReplace the type specification in this constructor call with the diamond operator ("<>").b 4e07b5dbd4e03f1b7b73518651ca658eh
+ç
+java:S22930"YReplace the type specification in this constructor call with the diamond operator ("<>").b c2f31f68e0403238248890a16bceb6f8h
+ç
+java:S22935"YReplace the type specification in this constructor call with the diamond operator ("<>").b 9ee8d09ef58373cd95feda08fe0c1a4dh
+ç
+java:S2293:"YReplace the type specification in this constructor call with the diamond operator ("<>").b c2f31f68e0403238248890a16bceb6f8h
+ç
+java:S2293?"YReplace the type specification in this constructor call with the diamond operator ("<>").b c2f31f68e0403238248890a16bceb6f8h
+ç
+java:S2293D"YReplace the type specification in this constructor call with the diamond operator ("<>").b c2f31f68e0403238248890a16bceb6f8h
+ç
+java:S2293I"YReplace the type specification in this constructor call with the diamond operator ("<>").b 4e07b5dbd4e03f1b7b73518651ca658eh
+ç
+java:S2293S"YReplace the type specification in this constructor call with the diamond operator ("<>").b 34c79075745c9e74782d04eb8a74c80dh
+ç
+java:S2293W"YReplace the type specification in this constructor call with the diamond operator ("<>").b 9ee8d09ef58373cd95feda08fe0c1a4dh
+ç
+java:S2293["YReplace the type specification in this constructor call with the diamond operator ("<>").b 4e07b5dbd4e03f1b7b73518651ca658eh
+ç	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.b 5d5332d001839a272c5565640cc075bah
+v
+java:S36550"BCall "c.isPresent()" or "!c.isEmpty()" before accessing the value.b 4a8a08f09d37b73795649038408b5f33h
+v
+java:S3655?"BCall "c.isPresent()" or "!c.isEmpty()" before accessing the value.b 4a8a08f09d37b73795649038408b5f33h
+v
+java:S3655D"BCall "c.isPresent()" or "!c.isEmpty()" before accessing the value.b 4a8a08f09d37b73795649038408b5f33h
+v
+java:S3655:"BCall "f.isPresent()" or "!f.isEmpty()" before accessing the value.b 8fa14cdd754f91cc6554c9e71929cce7h
+t
+java:S4684."@Replace this persistent entity with a simple POJO or DTO object.b a634e7960e04b1633c103382004fe526h
+t
+java:S46848"@Replace this persistent entity with a simple POJO or DTO object.b a634e7960e04b1633c103382004fe526h
+t
+java:S4684L"@Replace this persistent entity with a simple POJO or DTO object.b 10573b873d2fa5a365d558a45e328e47h
+Ω
+java:S1130Z"àRemove the declaration of thrown exception 'com.cropDetails.Exceptions.NoUserFoundException', as it cannot be thrown from method's body.b c4ca7d2718655e5615bdce356ade526dh

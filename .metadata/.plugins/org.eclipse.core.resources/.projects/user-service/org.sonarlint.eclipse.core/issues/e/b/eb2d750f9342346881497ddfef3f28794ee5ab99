@@ -1,0 +1,22 @@
+
+Ñ	java:S117\"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.b 8f9bfe9d1345237cb3b2b205864da075h
+ç	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.b 3cc3976b92e60c19175899ea6c9f0c02h
+á
+java:S6204ó"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'b f31c9542f92d797a57d6f9bafca179cdh
+á
+java:S6204ß"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'b f31c9542f92d797a57d6f9bafca179cdh
+á
+java:S6204≈"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'b f31c9542f92d797a57d6f9bafca179cdh
+p	java:S125⁄"<This block of commented-out lines of code should be removed.b 6a8076c9745e9395e4dba1b91b3663f7h
+p	java:S125‹"<This block of commented-out lines of code should be removed.b 5c8fd338dfbdb583447ee0435b17f49fh
+_	java:S106Ë"+Replace this use of System.out by a logger.b bb1c3f2ea781263d3a2bb92b06a2061fh
+p	java:S125Ì"<This block of commented-out lines of code should be removed.b 29f220e57127797b160080fc980e9c91h
+j
+java:S1854Ä"5Remove this useless assignment to local variable "u".b 75e1d04be6159cd17ffb4446965ef4f3h
+[
+java:S1481Ä"&Remove this unused "u" local variable.b 7b774effe4a349c6dd82ad4f4f21d34ch
+p	java:S125Ç"<This block of commented-out lines of code should be removed.b 77962817a774e11b27a11017dac7089fh
+~
+java:S2259—"BA "NullPointerException" could be thrown; "crop" is nullable here.8Ê€˜†∏1b e566e28130a63189d3c926ea547aa669h
+Ä
+java:S2583‘"DChange this condition so that it does not always evaluate to "false"8Ê€˜†∏1b 2d585fb2798f7b57282c601db1b1afe5h

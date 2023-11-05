@@ -1,0 +1,4 @@
+
+ç	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.b 97d5005fb0e1ac88013a033dcf26d795h
+Ü
+java:S1128"RRemove this unused import 'org.springframework.data.mongodb.core.mapping.MongoId'.b 3a5e54aa2836a6e281ce130cb4a299eah

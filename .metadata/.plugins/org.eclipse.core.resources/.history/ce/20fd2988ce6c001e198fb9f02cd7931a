@@ -1,9 +1,0 @@
-package com.cropDetails.Invoice.Dto;
-
-public class User {
-	private int uId;
-	private String role;
-	private String name;
-	
-
-}

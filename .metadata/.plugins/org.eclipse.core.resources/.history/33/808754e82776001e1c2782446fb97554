@@ -1,0 +1,268 @@
+package com.cropDetails.User.Service;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.cropDetails.User.Clients.CropClient;
+import com.cropDetails.User.Clients.EmailClient;
+import com.cropDetails.User.Dto.Crop;
+import com.cropDetails.User.Dto.Invoice;
+import com.cropDetails.User.Exceptions.InSufficentQuantityException;
+import com.cropDetails.User.Exceptions.InvoiceNotFoundException;
+import com.cropDetails.User.Exceptions.NoAdminFoundException;
+import com.cropDetails.User.Exceptions.NoCropsFoundException;
+import com.cropDetails.User.Exceptions.NoDealersFoundException;
+import com.cropDetails.User.Exceptions.NoFarmersFoundExceptions;
+import com.cropDetails.User.Exceptions.NoUserFoundException;
+import com.cropDetails.User.Exceptions.NotDealerException;
+import com.cropDetails.User.Exceptions.NotFarmerException;
+import com.cropDetails.User.Exceptions.UserAlreadyExistsException;
+import com.cropDetails.User.Exceptions.UserNotRegisteredException;
+import com.cropDetails.User.Model.User;
+import com.cropDetails.User.Repository.InvoiceRepository;
+import com.cropDetails.User.Repository.UserRepo;
+
+@Service
+public class UserServiceImpl implements IUserService {
+	@Autowired
+	UserRepo repo;
+	@Autowired
+	PasswordEncoder encoder;
+	@Autowired
+	EmailClient email;
+	@Autowired
+	CropClient cropClient;
+	@Autowired
+	InvoiceRepository irepo;
+
+	@Override
+	public Optional<User> addUser(User user) throws UserAlreadyExistsException {
+		Optional<User> f = repo.findById(user.getUId());
+		Optional<User> b = repo.findByEmail(user.getEmail());
+		if (f.isPresent() || b.isPresent()) {
+			throw new UserAlreadyExistsException();
+		}
+		user.setPassword(encoder.encode(user.getPassword()));
+		String mailBody = "Dear " + user.getName() + ",\n\n"
+				+ "Welcome to Crop Details and Apna Kisan - Your Partners in Agriculture!\n\n"
+				+ "We're thrilled to have you on board. Our platform is designed to make your farming and dealing experience easier and more productive.\n\n"
+				+ "Here's what you can do with Crop Details and Apna Kisan:\n\n" + "For Farmers:\n"
+				+ "- Access valuable insights and data for your crops.\n"
+				+ "- Connect with dealers and make better-informed decisions.\n"
+				+ "- Stay updated on the latest farming trends and news.\n\n" + "For Dealers:\n"
+				+ "- Reach out to a vast network of farmers and expand your business.\n"
+				+ "- Access real-time market data and make data-driven decisions.\n"
+				+ "- Stay informed about crop demand and supply trends.\n\n"
+				+ "Your journey with us begins now. If you have any questions or need assistance, don't hesitate to reach out to our support team.\n\n"
+				+ "Best regards,\n" + "The Crop Details and Apna Kisan Team\n"
+				+ "Contact us at support@cropdetails-apnakisan.com\n" + "Phone: +1-800-CROP-INFO";
+
+		email.sendMail(user.getEmail(), "Welcome to  Apna Kisan", mailBody);
+		return Optional.of(repo.save(user));
+	}
+
+	@Override
+	public Optional<User> viewUserById(int id) throws UserNotRegisteredException {
+		Optional<User> f = repo.findById(id);
+		if (f.isEmpty()) {
+			throw new UserNotRegisteredException();
+		}
+
+		return f;
+	}
+
+	@Override
+	public List<User> viewAllUsers() throws NoUserFoundException {
+
+		List<User> l = repo.findAll();
+		if (l.isEmpty()) {
+			throw new NoUserFoundException();
+		}
+		return l;
+
+	}
+
+	@Override
+	public Optional<User> updateUser(User User) throws UserNotRegisteredException {
+		Optional<User> f = repo.findById(User.getUId());
+		if (f.isEmpty()) {
+			throw new UserNotRegisteredException();
+		}
+		User far = repo.save(User);
+		return Optional.of(far);
+	}
+
+	@Override
+	public Boolean deleteUserById(int id) throws UserNotRegisteredException {
+		Optional<User> f = repo.findById(id);
+		if (f.isEmpty()) {
+			throw new UserNotRegisteredException();
+
+		}
+		repo.deleteById(id);
+		return true;
+	}
+
+	@Override
+	public Optional<User> getByName(String name) throws UserNotRegisteredException {
+		Optional<User> u = repo.findByName(name);
+		if (u.isEmpty()) {
+			throw new UserNotRegisteredException();
+		}
+
+		return u;
+	}
+
+	@Override
+	public Optional<User> getByMobile(Long mobile) throws UserNotRegisteredException {
+
+		Optional<User> u = repo.findByMobileNumber(mobile);
+		if (u.isEmpty()) {
+			throw new UserNotRegisteredException();
+		}
+
+		return u;
+	}
+
+	@Override
+	public Optional<User> getByEmail(String email) throws UserNotRegisteredException {
+		Optional<User> u = repo.findByEmail(email);
+		if (u.isEmpty()) {
+			throw new UserNotRegisteredException();
+		}
+
+		return u;
+	}
+
+	@Override
+	public Optional<List<User>> getAllFarmers() throws UserNotRegisteredException, NoFarmersFoundExceptions {
+
+		List<User> u = repo.findAll();
+		if (u.isEmpty()) {
+			throw new UserNotRegisteredException();
+		}
+		List<User> farmers = u // Default to an empty list if optional is empty
+				.stream().filter(user -> user.getRole().equalsIgnoreCase("ROLE_FARMER")).collect(Collectors.toList());
+		if (farmers.isEmpty()) {
+			throw new NoFarmersFoundExceptions();
+		}
+
+		return Optional.of(farmers);
+	}
+
+	@Override
+	public Optional<List<User>> getAllDealers() throws NoDealersFoundException, UserNotRegisteredException {
+
+		List<User> u = repo.findAll();
+		if (u.isEmpty()) {
+			throw new UserNotRegisteredException();
+		}
+		List<User> dealers = u // Default to an empty list if optional is empty
+				.stream().filter(user -> user.getRole().equalsIgnoreCase("ROLE_DEALER")).collect(Collectors.toList());
+		if (dealers.isEmpty()) {
+			throw new NoDealersFoundException();
+		}
+
+		return Optional.of(dealers);
+	}
+
+	@Override
+	public Boolean checkIsDealerById(int id) throws UserNotRegisteredException, NotDealerException {
+		Optional<User> userOptional = repo.findById(id);
+		if (userOptional.isPresent()) {
+			User user = userOptional.get();
+			if (user.getRole().equalsIgnoreCase("ROLE_DEALER")) {
+				return true;
+			} else {
+				throw new NotDealerException();
+			}
+		} else {
+			throw new UserNotRegisteredException();
+		}
+	}
+
+	@Override
+	public Optional<List<User>> getAllAdmins() throws NoAdminFoundException, UserNotRegisteredException {
+		List<User> u = repo.findAll();
+		if (u.isEmpty()) {
+			throw new UserNotRegisteredException();
+		}
+		List<User> admins = u // Default to an empty list if optional is empty
+				.stream().filter(user -> user.getRole().equalsIgnoreCase("ROLE_ADMIN")).collect(Collectors.toList());
+		if (admins.isEmpty()) {
+			throw new NoAdminFoundException();
+		}
+
+		return Optional.of(admins);
+	}
+
+	@Override
+	public Optional<Invoice> buyCrops(Invoice invoice)
+			throws InSufficentQuantityException, NoCropsFoundException, NotFarmerException {
+		Crop crop = cropClient.getCropById(invoice.getCropId()).getBody();
+		if (crop.getUId() != invoice.getFarmerId()) {
+			throw new NotFarmerException();
+		}
+		if (crop == null) {
+			throw new NoCropsFoundException();
+		}
+
+		// api check farmer based on the crop id
+		// ResponseEntity<Boolean> dealer =
+		// user.checkIsDealerById(invoice.getDealerId());
+
+//        if (crop == null || dealer == null) {
+//            // Handle invalid crop or dealer
+//            return null;
+//        }
+
+		if (crop.getQuantity() < invoice.getQuantity()) {
+			// Handle insufficient quantity of crops
+			throw new InSufficentQuantityException();
+		}
+
+		// Calculate the total cost
+		int totalCost = crop.getCost() * invoice.getQuantity();
+		System.out.println(totalCost);
+		// Update crop quantity
+		// call theupdate crop api
+		crop.setQuantity(crop.getQuantity() - invoice.getQuantity());
+		// cropRepository.save(crop);
+
+		// Create an invoice
+		Invoice newInvoice = new Invoice();
+		newInvoice.setCropId(invoice.getCropId());
+		newInvoice.setDealerId(invoice.getDealerId());
+		newInvoice.setTotalCost(totalCost);
+		newInvoice.setQuantity(invoice.getQuantity());
+		newInvoice.setDateOfPurhase(new Date());
+
+		// Save the invoice
+		Invoice gg = irepo.save(newInvoice);
+
+		return Optional.of(gg);
+	}
+
+	@Override
+	public Optional<List<Invoice>> getInvoiceOfDealer(int id)
+			throws NoDealersFoundException, InvoiceNotFoundException, UserNotRegisteredException, NotDealerException {
+		UserServiceImpl u = new UserServiceImpl();
+
+//		Boolean b=u.checkIsDealerById(id);
+//		if(b==false) {
+//			throw new NoDealersFoundException();
+//		}
+		List<Invoice> list = irepo.findByDealerId(id);
+		if (list.isEmpty()) {
+			throw new InvoiceNotFoundException();
+		}
+		return list;
+	}
+
+}

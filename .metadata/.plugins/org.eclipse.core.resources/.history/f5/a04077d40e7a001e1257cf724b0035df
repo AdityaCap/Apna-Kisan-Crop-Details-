@@ -1,0 +1,109 @@
+package com.cropDetails.Invoice.ServiceTestCases;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.springframework.util.Assert;
+
+import com.cropDetails.Invoice.Clients.CropClient;
+import com.cropDetails.Invoice.Clients.UserClient;
+import com.cropDetails.Invoice.Dto.Crop;
+import com.cropDetails.Invoice.Dto.User;
+import com.cropDetails.Invoice.Model.Invoice;
+import com.cropDetails.Invoice.Repository.InvoiceRepository;
+import com.cropDetails.Invoice.Service.InvoiceServiceImpl;
+
+public class InvoiceServiceImplTest {
+
+    @Mock
+    private InvoiceRepository invoiceRepository;
+
+    @Mock
+    private UserClient userClient;
+
+    @Mock
+    private CropClient cropClient;
+
+    private InvoiceServiceImpl invoiceService;
+
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+        invoiceService = new InvoiceServiceImpl(invoiceRepository, userClient, cropClient);
+    }
+
+    @Test
+    public void testGenerateInvoice() {
+        Invoice invoice = new Invoice();
+        invoice.setFarmerId(1);
+        invoice.setDealerId(2);
+        invoice.setCropId(3);
+
+        User farmer = new User();
+        farmer.setUId(1);
+
+        User dealer = new User();
+        dealer.setUId(2);
+
+        Crop crop = new Crop();
+        crop.setCropId(3);
+
+        Mockito.when(userClient.viewUserById(1)).thenReturn(farmer);
+        Mockito.when(userClient.viewUserById(2)).thenReturn(dealer);
+        Mockito.when(cropClient.getCropById(3)).thenReturn(crop);
+
+        invoiceService.generateInvoice(invoice);
+
+        Mockito.verify(invoiceRepository, Mockito.times(1)).save(invoice);
+    }
+
+    @Test
+    public void testCancelInvoice() {
+        int invoiceId = 1;
+        Invoice invoice = new Invoice();
+        invoice.setInvoiceId(invoiceId);
+
+        Mockito.when(invoiceRepository.findById(invoiceId)).thenReturn(Optional.of(invoice));
+
+        invoiceService.cancelInvoice(invoiceId);
+
+        Mockito.verify(invoiceRepository, Mockito.times(1)).deleteById(invoiceId);
+    }
+
+    @Test
+    public void testGetAllInvoices() {
+        List<Invoice> invoices = List.of(new Invoice(), new Invoice());
+        Mockito.when(invoiceRepository.findAll()).thenReturn(invoices);
+
+        List<Invoice> result = invoiceService.getAllInvoices();
+
+        Assert.assertEquals(invoices, result);
+    }
+
+    @Test
+    public void testBuyCrops() {
+        Invoice invoice = new Invoice();
+        invoice.setCropId(1);
+        invoice.setDealerId(2);
+        invoice.setQuantity(10);
+
+        Crop crop = new Crop();
+        crop.setCropId(1);
+        crop.setUId(3); // Farmer ID
+
+        Mockito.when(cropClient.getCropById(1)).thenReturn(crop);
+
+        invoiceService.buyCrops(invoice);
+
+        Assert.assertEquals(0, crop.getQuantity()); // Crop quantity should be updated
+        Assert.assertNotNull(invoice.getDateOfPurchase());
+    }
+
+    // Add more test cases for exceptions
+
+}

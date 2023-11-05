@@ -9,7 +9,7 @@ import com.cropDetails.Invoice.ErrorDecoder.CustomErrorDecoder;
 
 @FeignClient(name = "crop-service", url = "http://localhost:9091/crop", configuration = CustomErrorDecoder.class)
 public interface CropClient {
-	
+
 	@GetMapping("/getById/{id}")
 	public Crop getCropById(@PathVariable int id);
 

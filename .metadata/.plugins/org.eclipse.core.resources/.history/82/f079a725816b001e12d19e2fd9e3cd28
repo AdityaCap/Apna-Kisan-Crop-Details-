@@ -1,5 +1,0 @@
-package com.cropDetails.Invoice.Clients;
-
-public interface CropClient {
-
-}

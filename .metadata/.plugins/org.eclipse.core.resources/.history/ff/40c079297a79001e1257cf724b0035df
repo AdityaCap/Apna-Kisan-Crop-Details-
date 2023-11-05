@@ -1,0 +1,25 @@
+package com.cropDetails.Testing;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+public class NoCropRegisteredExceptionTest {
+
+    @Test
+    public void testNoCropRegisteredException() {
+        // Simulate a situation where the exception should be thrown
+        assertThrows(NoCropRegisteredException.class, () -> {
+            throw new NoCropRegisteredException();
+        });
+    }
+
+    @Test
+    public void testNoCropRegisteredExceptionWithMessage() {
+        // Simulate a situation where the exception should be thrown with a custom message
+        String errorMessage = "No crop registered";
+        assertThrows(NoCropRegisteredException.class, () -> {
+            throw new NoCropRegisteredException(errorMessage);
+        });
+    }
+}

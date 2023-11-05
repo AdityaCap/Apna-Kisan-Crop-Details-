@@ -11,8 +11,6 @@ import feign.FeignException;
 import feign.Response;
 import feign.codec.ErrorDecoder;
 
- 
-
 public class CustomErrorDecoder implements ErrorDecoder {
 
 	@Override

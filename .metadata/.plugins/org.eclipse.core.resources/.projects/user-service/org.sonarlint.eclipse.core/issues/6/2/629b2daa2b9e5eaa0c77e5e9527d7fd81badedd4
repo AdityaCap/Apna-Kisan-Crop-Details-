@@ -1,0 +1,62 @@
+
+ç
+java:S22931"YReplace the type specification in this constructor call with the diamond operator ("<>").b 4c2de11c9da644276f9f83237c9fa22ah
+ç
+java:S2293:"YReplace the type specification in this constructor call with the diamond operator ("<>").b 0d302a2874a56902d2118323c5704184h
+ç
+java:S2293B"YReplace the type specification in this constructor call with the diamond operator ("<>").b 4c2de11c9da644276f9f83237c9fa22ah
+ç
+java:S2293I"YReplace the type specification in this constructor call with the diamond operator ("<>").b 4c2de11c9da644276f9f83237c9fa22ah
+ç
+java:S2293P"YReplace the type specification in this constructor call with the diamond operator ("<>").b 9ee8d09ef58373cd95feda08fe0c1a4dh
+ç
+java:S2293X"YReplace the type specification in this constructor call with the diamond operator ("<>").b 4c2de11c9da644276f9f83237c9fa22ah
+ç
+java:S2293_"YReplace the type specification in this constructor call with the diamond operator ("<>").b 4c2de11c9da644276f9f83237c9fa22ah
+ç
+java:S2293g"YReplace the type specification in this constructor call with the diamond operator ("<>").b 4c2de11c9da644276f9f83237c9fa22ah
+ç
+java:S2293o"YReplace the type specification in this constructor call with the diamond operator ("<>").b 4c2de11c9da644276f9f83237c9fa22ah
+ç
+java:S2293x"YReplace the type specification in this constructor call with the diamond operator ("<>").b 0d302a2874a56902d2118323c5704184h
+é
+java:S2293Ä"YReplace the type specification in this constructor call with the diamond operator ("<>").b 0d302a2874a56902d2118323c5704184h
+é
+java:S2293à"YReplace the type specification in this constructor call with the diamond operator ("<>").b 0d302a2874a56902d2118323c5704184h
+é
+java:S2293é"YReplace the type specification in this constructor call with the diamond operator ("<>").b 9ee8d09ef58373cd95feda08fe0c1a4dh
+é
+java:S2293ñ"YReplace the type specification in this constructor call with the diamond operator ("<>").b 875f60bb968502ad88f9f55b46ab796ah
+é
+java:S2293û"YReplace the type specification in this constructor call with the diamond operator ("<>").b aa884d73d457b0e7b5a25a6d0d70a1ebh
+ç	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.b c018735db9ca6fdea76d841c376d54b7h
+v
+java:S3655g"BCall "u.isPresent()" or "!u.isEmpty()" before accessing the value.b 7b774effe4a349c6dd82ad4f4f21d34ch
+v
+java:S3655B"BCall "f.isPresent()" or "!f.isEmpty()" before accessing the value.b 8fa14cdd754f91cc6554c9e71929cce7h
+w
+java:S3655à"BCall "u.isPresent()" or "!u.isEmpty()" before accessing the value.b 7b774effe4a349c6dd82ad4f4f21d34ch
+Ö
+java:S3655ñ"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.b c76fb0252d268b1a7c8a03404262da27h
+v
+java:S3655_"BCall "u.isPresent()" or "!u.isEmpty()" before accessing the value.b 7b774effe4a349c6dd82ad4f4f21d34ch
+w
+java:S3655Ä"BCall "u.isPresent()" or "!u.isEmpty()" before accessing the value.b 7b774effe4a349c6dd82ad4f4f21d34ch
+{
+java:S3655û"FCall "inv.isPresent()" or "!inv.isEmpty()" before accessing the value.b 545f7f577c93318b34476e9999931731h
+v
+java:S36551"BCall "f.isPresent()" or "!f.isEmpty()" before accessing the value.b 8fa14cdd754f91cc6554c9e71929cce7h
+v
+java:S3655x"BCall "u.isPresent()" or "!u.isEmpty()" before accessing the value.b 7b774effe4a349c6dd82ad4f4f21d34ch
+v
+java:S3655I"BCall "f.isPresent()" or "!f.isEmpty()" before accessing the value.b 8fa14cdd754f91cc6554c9e71929cce7h
+v
+java:S3655o"BCall "u.isPresent()" or "!u.isEmpty()" before accessing the value.b 7b774effe4a349c6dd82ad4f4f21d34ch
+v
+java:S3655X"BCall "f.isPresent()" or "!f.isEmpty()" before accessing the value.b 8fa14cdd754f91cc6554c9e71929cce7h
+t
+java:S4684/"@Replace this persistent entity with a simple POJO or DTO object.b ee11cbb19052e40b07aac0ca060c23eeh
+t
+java:S4684V"@Replace this persistent entity with a simple POJO or DTO object.b ee11cbb19052e40b07aac0ca060c23eeh
+u
+java:S4684ì"@Replace this persistent entity with a simple POJO or DTO object.b e5f96ae00443877315fbb64fd3d90005h

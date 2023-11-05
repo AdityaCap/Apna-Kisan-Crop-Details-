@@ -12,6 +12,7 @@ import com.cropDetails.Exceptions.NoSubscriptionFoundException;
 import com.cropDetails.Exceptions.NoUserFoundException;
 import com.cropDetails.Exceptions.NotDealerException;
 import com.cropDetails.Exceptions.SubscriptionAlreadyExistsException;
+import com.cropDetails.Exceptions.UserNotRegisteredException;
 
 
 
@@ -44,6 +45,10 @@ public class CropExceptionHandler {
 	@ExceptionHandler(NoUserFoundException.class)
 	public ResponseEntity<String>NoUserFoundException(){
 		return new ResponseEntity<String>("No User Found.",HttpStatus.NOT_FOUND);
+	}
+	@ExceptionHandler(UserNotRegisteredException.class)
+	public ResponseEntity<String>UserNotRegisteredException(){
+		return new ResponseEntity<String>("No User is registered with us",HttpStatus.NOT_FOUND);
 	}
 
 }

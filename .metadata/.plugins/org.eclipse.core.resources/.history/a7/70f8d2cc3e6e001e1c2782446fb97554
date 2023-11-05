@@ -1,9 +1,0 @@
-package com.cropDetails.User.Repository;
-
-import org.springframework.data.mongodb.repository.cdi.MongoRepositoryBean;
-
-import com.cropDetails.User.Dto.Invoice;
-
-public interface InvoiceRepo extends MongoRepositoryBean<Invoice,Integer>{
-
-}

@@ -1,0 +1,7 @@
+package com.cropDetails.Testing;
+
+package com.cropDetails.Testing;
+
+public class NoCropRegisteredException extends Exception {
+
+}

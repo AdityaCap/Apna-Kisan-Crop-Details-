@@ -17,18 +17,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cropDetails.User.Dto.Invoice;
+import com.cropDetails.User.Exceptions.InSufficentQuantityException;
+import com.cropDetails.User.Exceptions.InvoiceNotFoundException;
 import com.cropDetails.User.Exceptions.NoAdminFoundException;
+import com.cropDetails.User.Exceptions.NoCropsFoundException;
 import com.cropDetails.User.Exceptions.NoDealersFoundException;
 import com.cropDetails.User.Exceptions.NoFarmersFoundExceptions;
 import com.cropDetails.User.Exceptions.NoUserFoundException;
 import com.cropDetails.User.Exceptions.NotDealerException;
+import com.cropDetails.User.Exceptions.NotFarmerException;
 import com.cropDetails.User.Exceptions.UserAlreadyExistsException;
 import com.cropDetails.User.Exceptions.UserNotRegisteredException;
 import com.cropDetails.User.Model.User;
 import com.cropDetails.User.Service.IUserService;
 
 import jakarta.validation.Valid;
-@CrossOrigin
+
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -36,11 +42,10 @@ public class UserController {
 	IUserService ser;
 
 	// Admin
-	
+
 	@PostMapping("/register")
 	public ResponseEntity<User> registerUser(@Valid @RequestBody User user) throws UserAlreadyExistsException {
 		Optional<User> f = ser.addUser(user);
-
 		return new ResponseEntity<User>(f.get(), HttpStatus.OK);
 
 	}
@@ -54,10 +59,17 @@ public class UserController {
 	}
 
 	// Admin
-	@PreAuthorize("hasAnyRole('DEALER','ADMIN')")
+	//@PreAuthorize("hasAnyRole('DEALER','ADMIN')")
 	@GetMapping("/viewById/{id}")
 	public ResponseEntity<User> viewUserById(@PathVariable int id) throws UserNotRegisteredException {
 		Optional<User> f = ser.viewUserById(id);
+		return new ResponseEntity<User>(f.get(), HttpStatus.OK);
+	}
+
+	@PreAuthorize("hasAnyRole('DEALER','ADMIN','FARMER')")
+	@GetMapping("/viewByEmail/{email}")
+	public ResponseEntity<User> viewUserByEmail(@PathVariable String email) throws UserNotRegisteredException {
+		Optional<User> f = ser.getByEmail(email);
 		return new ResponseEntity<User>(f.get(), HttpStatus.OK);
 	}
 
@@ -92,14 +104,13 @@ public class UserController {
 
 	}
 
-	@PreAuthorize("hasAnyRole('ADMIN')")
+	@PreAuthorize("hasAnyRole('ADMIN','DEALER')")
 	@GetMapping("/getByEmail/{email}")
 	public ResponseEntity<User> getByEmail(@PathVariable String email) throws UserNotRegisteredException {
 		Optional<User> u = ser.getByEmail(email);
 		return new ResponseEntity<User>(u.get(), HttpStatus.OK);
 
 	}
-	
 
 	@PreAuthorize("hasAnyRole('DEALER','ADMIN')")
 	@GetMapping("/getAllFarmers")
@@ -116,7 +127,7 @@ public class UserController {
 		Optional<List<User>> u = ser.getAllDealers();
 		return new ResponseEntity<List<User>>(u.get(), HttpStatus.OK);
 	}
-	
+
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("/getAllAdmins")
 	public ResponseEntity<List<User>> getAllAdmins() throws NoAdminFoundException, UserNotRegisteredException {
@@ -125,11 +136,33 @@ public class UserController {
 		return new ResponseEntity<List<User>>(u.get(), HttpStatus.OK);
 	}
 
-	
 	@GetMapping("isDealer/{id}")
 	public ResponseEntity<Boolean> checkIsDealerById(@PathVariable int id)
 			throws UserNotRegisteredException, NotDealerException {
 		return new ResponseEntity<Boolean>(ser.checkIsDealerById(id), HttpStatus.OK);
+	}
+
+	@PreAuthorize("hasAnyRole('DEALER','ADMIN')")
+	@PostMapping("/buy")
+	public ResponseEntity<Invoice> buyCrops(  @Valid @RequestBody Invoice invoice)
+			throws InSufficentQuantityException, NoCropsFoundException, NotFarmerException {
+
+		return new ResponseEntity<Invoice>(ser.buyCrops(invoice).get(), HttpStatus.OK);
+	}
+
+	@PreAuthorize("hasAnyRole('DEALER','ADMIN')")
+	@GetMapping("getInvoiceByDealerId/{id}")
+	public ResponseEntity<List<Invoice>> getInvoices(@PathVariable int id)
+			throws InvoiceNotFoundException, NoDealersFoundException, UserNotRegisteredException, NotDealerException {
+		Optional<List<Invoice>> inv = ser.getInvoiceOfDealer(id);
+		return new ResponseEntity<List<Invoice>>(inv.get(), HttpStatus.OK);
+	}
+	@PreAuthorize("hasAnyRole('DEALER','ADMIN','FARMER')")
+	@GetMapping("getInvoiceByFarmerId/{id}")
+	public ResponseEntity<List<Invoice>> getInvoicesForfarmer(@PathVariable int id)
+			throws InvoiceNotFoundException, NoFarmersFoundExceptions, UserNotRegisteredException, NotDealerException {
+		Optional<List<Invoice>> inv = ser.getInvoiceOfFarmer(id);
+		return new ResponseEntity<List<Invoice>>(inv.get(), HttpStatus.OK);
 	}
 
 }
